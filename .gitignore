@@ -1,0 +1,45 @@
+# byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# tests and coverage
+*.pytest_cache
+.coverage
+
+# database & logs
+*.db
+*.sqlite3
+*.log
+
+# venv
+env
+venv
+
+# other
+.DS_Store
+
+# sphinx docs 
+_build
+_static
+_templates
+
+# javascript
+package-lock.json
+.vscode/symbols.json
+
+apps/static/assets/node_modules
+apps/static/assets/yarn.lock
+apps/static/assets/.temp
+
+migrations
+
+dataset/BaselineData
+dataset/BaselineDataTest
+dataset/BaselineDataNew
+dataset/BaselineDataNew2
+dataset/BaselineDataNewCleaned
+ssh-key
+
+dataset/BaselineDataNew2/hoh_result_cleaned.csv
+dataset/BaselineDataNew2.zip
+apps/static/assets/BaselineDataNew2.zip
