@@ -345,3 +345,8 @@ transform: scale(1.05);
 .labelx{
   font-family: Roboto-bold;
  }
+
+ .formx{
+  color:black;
+  text-align:left;
+ }

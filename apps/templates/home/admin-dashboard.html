@@ -2,10 +2,187 @@
 
 
 {% block content%}
-<body> 
+<body>
     
+    <div class="modal fade" id="modalViewRequest" tabindex="-1" aria-labelledby="modalViewRequestLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width:80%;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">View Request</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
+                    {{approval_rejection_form.hidden_tag() }}
+                    <input type="hidden" id="req_request_id" name="req_request_id" />
+                    <div class="row">
+                        <div class="col-12  p-1">
+                            <label id="labelx" for="first_name" class="labelx">Requested Datastack Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <span class="fas fa-database"></span>
+                                </span>
+                                
+                                <input class="form-control" id="req_datastack_name" name="req_datastack_name" type="text" disabled="">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <a href="" id="req_datastack_url" name="req_datastack_url"><span class="fa-solid fa-link"></span>&nbsp; Click to see datastack details </a>
+                                </span>
+                            </div>
+                           </div>
+                    </div>
+                    <div class="row">   
+                        <div class="col-md-6 p-1">
+                            <label id="labelx" for="last_name">Requesting user's First Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <span class="fas fa-user"></span>
+                                </span>
+                                <input class="form-control" id="req_first_name" name="req_first_name" type="text" disabled="">                                               
+                            </div>
+                              
+                        </div>
+                        <div class="col-md-6  p-1">
+                            <label id="labelx" for="last_name">Requesting user's Last Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <span class="fas fa-user"></span>
+                                </span>
+                                <input class="form-control" id="req_last_name" name="req_last_name" type="text" disabled="">                                               
+                            </div>
+                           
+                        </div>
+                    </div>
 
+                    <div class="row align-items-center">
+                        
+                        <div class="col-md-6  p-1">
+                            <label id="labelx" for="name_of_organization">Name of Organization</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="fas fa-file-signature"></span>
+                                </span>
+                                <input class="form-control" id="req_name_of_organization" name="req_name_of_organization" type="text" disabled="">                                               
+                            </div>
+                           
+                        </div>
+                        
+
+                        <div class="col-md-6  p-1">
+                            <label id="labelx" for="type_of_organization">Type of Organization</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="fas fa-file-signature"></span>
+                                </span>
+                                <input class="form-control" id="req_type_of_organization" name="req_type_of_organization" type="text" disabled="">                                               
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6  p-1">
+                            <label id="labelx" for="email">Email address </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </span>
+                                <input class="form-control" id="req_email" name="req_email" type="text" disabled="">                                               
+                            </div>
+                           
+                        </div>
+
+                        <div class="col-md-6  p-1">
+                            <label id="labelx" for="phone">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    +91
+                                </span>
+                                <input class="form-control" id="req_phone" name="req_phone" type="text" disabled="">                                               
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    <div class="row">
+
+
+
+                        <div class="col-md-6  p-1">
+                            <div class="form-group">
+                                <label id="labelx" for="authority_document">
+                                    Authority Letter from Department
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <a id="req_authority_document" name="req_authority_document" target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
+                                    </span>
+                                    
+                                </div>
+                               
+                            </div>
+                            
+
+                            
+                        </div>
+
+                        <div class="col-md-6  p-1">
+                            <div class="form-group">
+                                <label id="labelx" for="identity_document">Identification Document</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-gray">
+                                        <a id="req_identity_document" name="req_identity_document"  target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
+                                    </span>
+                                </div>
+                                <!--form.name_of_organization(placeholder="Name of Organization", class="input form-control", type="text")-->
+                                <!-- <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" required=""> -->
+                            </div>
+                           
+                           
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12  p-1">
+                            <div class="form-group">
+                                <label id="labelx" for="purpose">Purpose</label>
+                                <textarea class="input form-control" id="req_purpose" name="req_purpose" type="text" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12  p-1">
+                            <div class="form-group">
+                                <label id="labelx" for="remarks">REMARKS</label>
+                                <textarea class="input form-control" id="req_remarks" name="req_remarks" placeholder="Enter remarks for approval or rejection" required="" type="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <a href="{{ url_for('authentication_blueprint.login') }}"><button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button></a>
+                        <a href="{{ url_for('authentication_blueprint.register') }}"> <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button></a>
+                    </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
     <!-- Hero Section -->
+
+
+    {% if alert_information %}
+    <script>
+        alert("{{alert_information}}");
+    </script>
+    {% endif %}
     <div class="hero-section heading-banner">
         <div class="row text-start" style="margin-bottom:50px;">
             <div class="col-12">
@@ -14,22 +191,23 @@
                 </p>
             </div>
         </div>
-
-
+        
         <div class="row">
             <div class="col-12" >
                 <div class="shadow filtercardsborder details__content-tabs">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active navitemsmain" id="tab-1-tab" data-bs-toggle="tab" data-bs-target="#tab-1" type="button" role="tab" aria-controls="tab-1" aria-selected="true">
-                                Subscriptions
+                                Subscription and Requests
                             </button>
                         </li>
-                        <!-- <li class="nav-item" role="presentation">
+
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link navitemsmain" id="tab-2-tab" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1">
-                                Inbox
+                                Profile
                             </button>
                         </li>
+                        <!--
                         <li class="nav-item" role="presentation">
                             <button class="nav-link navitemsmain" id="tab-2-tab" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1">
                                 Profile
@@ -50,139 +228,366 @@
                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
                             <div class="row">
                                 <div class="col-12" style="padding:20px;">
-                                    
-                                    
-                                    <div class="container mt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-                                        <div class="row align-items-stretch">
-                                            <!-- Small width column for icon -->
-                                            <div class="col-2 icon-col d-flex align-items-center" style="color:#000; text-align: center;">
-                                                <div class="row" style="color:#709f83;">
-                                                    <div class="col-12">
-                                                        <i class="fa-solid fa-circle-check" style="font-size:80px;"></i>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        APPROVED
-                                                    </div>
-                                                    
-                                                </div>
+                                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+                                            <div class="d-block mb-4 mb-md-0">
+                                                
                                             </div>
-                                            <!-- Second column with two rows -->
-                                            <div class="col" style="text-align: left;">
-                                                <div class="row">
-                                                    <div class="col bg-white text-black p-3">
-                                                        <span>Datastack Name: </span>
-                                                        <span style="font-family: Roboto-bold;">Dataset Name</span>
+                                            <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                                                <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+                                                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                                    New Plan
+                                                </a>
+                                                <div class="btn-group ms-2 ms-lg-3">
+                                                    <button type="button" class="btn btn-sm btn-outline-gray-600">Share</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-gray-600">Export</button>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        
+                                        <div class="table-settings mb-4">
+                                            <div class="row align-items-center justify-content-between">
+                                                <!-- <div class="col col-md-6 col-lg-3 col-xl-4">
+                                                    <div class="input-group me-2 me-lg-3 fmxw-400">
+                                                        <span class="input-group-text">
+                                                            <svg class="icon icon-xs" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                                                            </svg>
+                                                        </span>
+                                                        <input type="text" class="form-control" placeholder="Search orders">
                                                     </div>
-                                                </div>
+                                                </div> -->
+                                                <!-- <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path></svg>
+                                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-xs dropdown-menu-end pb-0" data-popper-placement="bottom-end" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(1132px, 497px, 0px);">
+                                                            <span class="small ps-3 fw-bold text-dark">Show</span>
+                                                            <a class="dropdown-item d-flex align-items-center fw-bold" href="#">10 <svg class="icon icon-xxs ms-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg></a>
+                                                            <a class="dropdown-item fw-bold" href="#">20</a>
+                                                            <a class="dropdown-item fw-bold rounded-bottom" href="#">30</a>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cardx card-body border-0 shadow table-wrapper table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="border-gray-200">Request ID</th>
+                                                        <th class="border-gray-200">Datastack</th>						
+                                                        <th class="border-gray-200">Requester</th>
+                                                        <th class="border-gray-200">Department</th>
+                                                        <th class="border-gray-200">Organization Type</th>
+                                                        <th class="border-gray-200">Identity Proof</th>
+                                                        <th class="border-gray-200">Authorization Proof</th>
+                                                        <th class="border-gray-200">Current Status</th>
+                                                        <th class="border-gray-200">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Item -->
 
-                                               
-                                                <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
-                                                    <div class="col-4 bg-white text-black p-3">Date Requested<br><span style="font-family: Roboto-bold;">DATE_TIME</span></div>
-                                                    <div class="col-4  bg-white text-black p-3">Date of Approval<br><span style="font-family: Roboto-bold;">DATE_TIME</span></div>
-                                                    <div class="col-4 bg-white text-black p-3"><button class="btn btn-warning">Download Datastack</button></div>
-                                                </div>
-                                                <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
-                                                    <div class="col bg-white text-black p-3">
-                                                        <span>Remarks: </span>
-                                                        <span style="font-family: Roboto-bold;">REMARKS</span>
+                                                    {% for r,d,u in existing_requests %}
+                                                    <tr>
+                                                        <td>
+                                                            <a href="#" class="fw-bold">
+                                                                {{r.request_id}}
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <span class="fw-normal" style="max-width:300px;">{{d.datastack_name}} </span>
+                                                        </td>
+                                                        <td><span class="fw-normal">{{u.first_name}} {{u.last_name}}</span></td>                        
+                                                        <td><span class="fw-bold">{{u.name_of_organization}}</span></td>
+                                                        <td><span class="fw-bold">{{u.type_of_organization}}</span></td>
                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-                                        <div class="row align-items-stretch">
-                                            <!-- Small width column for icon -->
-                                            <div class="col-2 icon-col d-flex align-items-center" style="color:#000; text-align: center;">
-                                                <div class="row" style="color:#9f7670;">
-                                                    <div class="col-12">
-                                                        <i class="fa-solid fa-ban" style="font-size:80px;"></i>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        REJECTED
-                                                    </div>
+                                                        <td><span class="fw-bold" style="font-size:18px;"><a href="{{r.identity_proof}}" target="_blank"><span class="fa-solid fa-file-pdf text-danger"></span></a></span></td>
+                                                        <td><span class="fw-bold" style="font-size:18px;"><a href="{{r.document_proof}}" target="_blank"><span class="fa-solid fa-file-pdf text-danger"></span></a></span></td>
+                                                        <td><span class="fw-bold">{{r.status_of_request}}</span></td>                                                      
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="icon icon-sm">
+                                                                        <i class="fa-solid fa-ellipsis" style="font-size:25px;"></i>
+                                                                    </span>
+                                                                    <span class="visually-hidden">Take Action</span>
+                                                                </button>
+                                                                <div class="dropdown-menu py-0">
+                                                                    
+                                                                    <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#modalViewRequest" data-request-id="{{r.request_id}}" data-datastack-name="{{d.datastack_name}}" data-datastack-url="UNKNOWNYET" data-first-name="{{u.first_name}}" data-last-name="{{u.last_name}}" data-name-of-organization="{{u.name_of_organization}}" data-type-of-organization= "{{u.type_of_organization}}" data-email="{{u.email}}" data-phone="{{u.phone}}" data-authority-document="{{r.document_proof}}" data-identity-document="{{r.identity_proof}}"  data-purpose="{{r.purpose}}" onclick="modalbox(this);"><span class="fa-solid fa-street-view"></span>View Details</a>
+                                                                    <a class="dropdown-item text-success" href="#"><span class="fas fa-check me-2"></span> Approve</a>
+                                                                    <a class="dropdown-item text-danger rounded-bottom" href="#"><span class="fa-solid fa-ban me-2"></span>Reject</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    <!-- Item -->
                                                     
-                                                </div>
-                                            </div>
-                                            <!-- Second column with two rows -->
-                                            <div class="col" style="text-align: left;">
-                                                <div class="row">
-                                                    <div class="col bg-white text-black p-3">
-                                                        <span>Datastack Name: </span>
-                                                        <span style="font-family: Roboto-bold;">Dataset Name</span>
-                                                    </div>
-                                                </div>
-
-                                               
-                                                <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
-                                                    <div class="col-4 bg-white text-black p-3">Date Requested<br><span style="font-family: Roboto-bold;">DATE_TIME</span></div>
-                                                    <div class="col-4  bg-white text-black p-3">Date of Rejection<br><span style="font-family: Roboto-bold;">DATE_TIME</span></div>
-                                                    <div class="col-4 bg-white text-black p-3"></div>
-
-                                                </div>
-                                                <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
-                                                    <div class="col bg-white text-black p-3">
-                                                        <span>Remarks: </span>
-                                                        <span style="font-family: Roboto-bold;">REMARKS</span>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-                                        <div class="row align-items-stretch">
-                                            <!-- Small width column for icon -->
-                                            <div class="col-2 icon-col d-flex align-items-center" style="color:#000; text-align: center;">
-                                                <div class="row" style="color:#bbba81;">
-                                                    <div class="col-12">
-                                                        <i class="fa-solid fa-hourglass-half" style="font-size:80px;"></i>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        PENDING
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <!-- Second column with two rows -->
-                                            <div class="col" style="text-align: left;">
-                                                <div class="row">
-                                                    <div class="col bg-white text-black p-3">
-                                                        <span>Datastack Name: </span>
-                                                        <span style="font-family: Roboto-bold;">Dataset Name</span>
-                                                    </div>
-                                                </div>
-
-                                               
-                                                <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
-                                                    <div class="col-4 bg-white text-black p-3">Date Requested<br><span style="font-family: Roboto-bold;">DATE_TIME</span></div>
-                                                    <div class="col-4  bg-white text-black p-3"></div>
-                                                    <div class="col-4 bg-white text-black p-3"></div>
-
-                                                </div>
+                                                                                  
+                                                </tbody>
+                                            </table>
+                                            <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination mb-0">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">Previous</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">1</a>
+                                                        </li>
+                                                        <li class="page-item active">
+                                                            <a class="page-link" href="#">2</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">3</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">4</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">5</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                                <div class="fw-normal small mt-4 mt-lg-0">Showing <b>5</b> out of <b>25</b> entries</div>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                                 <hr>
                             </div>
                         </div>
+                        
     
                         <!-- Tab 2 Content -->
-                        <!-- <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
                             <div class="row">
                                 <div class="col-12">
-                                    <b style="font-family: Roboto-bold;">License Agreement : </b>
+                                    <div class="container">
+                                        <p class="text-center">
+                                        </p>
+                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/signin.svg">
+                                            <div class="col-12  align-items-center justify-content-center">
+                                                <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5">
+                                                    <div class="text-center text-md-center mb-4 mt-md-0">
+                                                        <h1 class="mb-0 h3">
+                                                            Edit Profile
+                                                        </h1>
+                                                        <br />
+                                                        <p style="color:#2fb0bf;">
+                                                            {% if msg %}
+                                                                {{ msg | safe }}
+                                                            {% else %}
+                                                                Edit your details
+                                                            {% endif %}                                     
+                                                        </p> 
+                                                    </div>
+                                                    
+                                                    {% if success %}
+                        
+                                                        <div class="d-grid">
+                                                            <a href="{{ url_for('authentication_blueprint.login') }}" 
+                                                               class="btn btn-gray-800">Sign IN</a>
+                                                        </div>
+                        
+                                                    {% else %}
+                        
+                                                        
+                                                        
+                                                        <form  method="post" action="" class="mt-4 formx">
+                                                            {{ form.hidden_tag() }}
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div>
+                                                                        <label for="first_name">First Name</label>
+                                                                        <input class="form-control" id="first_name" name="first_name" type="text" placeholder="" disabled value="{{current_user.first_name}}">
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">First name cannot be changed</li></ul>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div>
+                                                                        <label for="last_name">Last Name</label>
+
+                                                                        <input class="form-control" id="last_name" name="last_name" type="text" placeholder="Enter your last name" disabled value="{{current_user.last_name}}">
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">Last name can not be changed</li></ul>
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="date_of_birth">Date of Birth</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">
+                                                                            <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                                                        </span>
+                                                                        <input data-datepicker="" class="form-control datepicker-input" id="date_of_birth" name="date_of_birth" type="text" placeholder="dd/mm/yyyy" disabled value="{{current_user.date_of_birth}}">                                               
+                                                                      </div>
+                                                                </div>
+                        
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="type_of_organization">Type of Organization</label>
+                                                                    <select class="form-select mb-0" aria-label="Type of organization" id="type_of_organization"  name="type_of_organization">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="Government">Government</option>
+                                                                        <option value="Academic Institutes">Academic Institutes</option>
+                                                                        <option value="R&D">R&D</option>
+                                                                        <option value="Individuals">Individuals</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="name_of_organization">Name of organization</label>
+                                                                        <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" disabled value="{{current_user.name_of_organization}}"> 
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">Organization name must contain at least one letter and can include letters, numbers, spaces, and special characters.</li></ul>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="country">Country</label>
+                                                                    <select class="form-select mb-0" id="country" name="country" aria-label="Choose country">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="India">India</option>
+                                                
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="address">Address</label>
+                                                                        
+                                                                        <input class="form-control" id="address" name="address" type="text" placeholder="Enter your home address" disabled value="{{current_user.name_of_organization}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="gender">State</label>
+                                                                    <select class="form-select mb-0" id="state" name="state" aria-label="Choose state">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="J&K">J&K</option>
+                                                
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                        
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="city_town">City/Town</label>
+                                                                        
+                                                                        <input class="form-control" id="city_town" name="city_town" type="text" placeholder="City/Town" disabled value="{{current_user.city_town}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="city">Pincode</label>
+                                                                        {{ form.pincode(placeholder="Pincode", class="input form-control", type="text") }}
+                                                                        <!-- <input class="form-control" id="pincode" name="pincode" type="text" placeholder="Pincode" required=""> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="email">Your Email</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <span class="fas fa-envelope"></span>
+                                                                            </span>
+                                                                            {{ form.email(placeholder="Email", class="input form-control", type="email") }}
+                                                                        </div>  
+                                                                    </div>
+                                                                </div>
+                        
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="phone">Mobile number</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">
+                                                                            +91
+                                                                        </span>
+                                                                        {{ form.phone(placeholder="(10 digits)", class="input form-control", type="text") }}
+                                                                        <!-- <input class="form-control" id="phone" type="text" placeholder="(10 digits)" required="">                                                -->
+                                                                      </div>
+                                                                    <!-- <div class="form-group">
+                                                                        <label for="phone">Mobile Number</label>
+                                                                        <div class="row">
+                                                                            
+                                                                            <div class="col-2" style="width:20%;"><input class="form-control" id="ccode" type="text" placeholder="+91" disabled></div>
+                                                                            <div class="col-10" style="width:80%;"><input class="form-control" id="phone" type="text" placeholder="(10 digits)" required=""></div>
+                                                                        </div>
+                                                                        
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label for="username">Set Username</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <span class="fas fa-user-circle"></span>
+                                                                            </span>
+                                                                            {{ form.username(placeholder="Username", class="form-control") }}
+                                                                        </div> 
+                                                                        <ul ><li style="font-size:10px;">Use at least 6 characters</li><li style="font-size:10px;">Use only letters and digits</li><li style="font-size:10px;">Do NOT use symbols or spaces</li></ul>
+                                                                        
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                            <label for="password">Set Password</label>
+                                                                        
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon2">
+                                                                                    <span class="fas fa-unlock-alt"></span>
+                                                                                </span>
+                                                                                {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                                                                            </div> 
+                                                                            <ul ><li style="font-size:10px;">Use at least 8 characters</li><li style="font-size:10px;">Use one uppercase, one numeric and one lowercase and one special character</li></ul>
+                                                                </div>
+                                                                <div class="mb-4 mt-4">
+                                                                    <div class="form-check">
+                                                                        <!-- <input class="form-check-input" type="checkbox" value="" id="remember"> -->
+                                                                        <label class="form-check-label fw-normal mb-0 " for="remember">
+                                                                            By submitting, I agree to the <a href="#" class="fw-bold"><a style="color:#0875bd;">Terms & Conditions</a> and <a style="color:#0875bd;">License of Usage</a>.
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                            <div class="mt-3">
+                                                                <div class="d-grid">
+                                                                    <!--<button type="submit" name="edit-profile" class="btn btn-gray-800">Form</button>-->
+                                                                    EDIT PROFILE IS CURRENTLY DISABLED
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </form>
+                                                        <br />
+                                                        
+                                                    
+                                                    {% endif %}
+                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                   <a href="http://google.com">Click here</a>
-                                </div>
+                                
                                 <hr>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,6 +596,67 @@
         
 
     </div>
+    
+    <script>
+        function modalbox(x)
+        {
+            let request_id = x.getAttribute("data-request-id");
+            let datastack_name = x.getAttribute("data-datastack-name");
+            let datastack_url = x.getAttribute("data-datastack-url");  
+            let first_name = x.getAttribute("data-first-name"); 
+            let last_name = x.getAttribute("data-last-name"); 
+            let name_of_organization = x.getAttribute("data-name-of-organization"); 
+            let type_of_organization = x.getAttribute("data-type-of-organization"); 
+            let email = x.getAttribute("data-email"); 
+            let phone = x.getAttribute("data-phone"); 
+            let authority_document = x.getAttribute("data-authority-document"); 
+            let identity_document = x.getAttribute("data-identity-document"); 
+
+            let purpose = x.getAttribute("data-purpose"); 
+            
+
+
+            document.getElementById('req_request_id').value=request_id;
+            document.getElementById('req_datastack_name').value=datastack_name;
+            document.getElementById('req_datastack_url').href=datastack_url;
+            document.getElementById('req_first_name').value=first_name;
+            document.getElementById('req_last_name').value=last_name;
+            document.getElementById('req_name_of_organization').value=name_of_organization;
+            document.getElementById('req_type_of_organization').value=type_of_organization;
+            document.getElementById('req_email').value=email;
+            document.getElementById('req_phone').value=phone;
+            document.getElementById('req_authority_document').href=authority_document;
+            document.getElementById('req_identity_document').href=identity_document;
+            
+            document.getElementById('req_purpose').innerText=purpose;
+            
+            
+
+            
+        }
+
+
+        function formatDate(dateString) {
+            let dateObj = new Date(dateString);  // Convert string to Date object
+            
+            let options = { year: 'numeric', month: 'long', day: 'numeric' };
+            let formattedDate = dateObj.toLocaleDateString('en-US', options);
+
+            let timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
+            let formattedTime = dateObj.toLocaleTimeString('en-US', timeOptions);
+
+            return `${formattedDate} at ${formattedTime}`;
+        }
+
+        // Find the span and update its content dynamically
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("[data-date]").forEach(el => {  
+            let rawDate = el.getAttribute("data-date");  
+            if (rawDate!=="")
+                el.innerText = formatDate(rawDate) + " (UTC)";
+            });
+});
+    </script>
     
     <!-- Search and Filter -->
 

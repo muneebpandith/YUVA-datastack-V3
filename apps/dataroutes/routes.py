@@ -15,7 +15,9 @@ from datetime import datetime, timedelta
 from apps import db, login_manager
 from apps.authentication.models import Users
 from apps.dataroutes.models import Datastacks, SubscriptionRequests
-from apps.dataroutes.forms import CreateSubscriptionRequestForm
+from apps.dataroutes.forms import CreateSubscriptionRequestForm, ApprovalRejectionForm
+from apps.authentication.forms import EditAccountForm
+
 from flask_login import login_required, current_user
 from apps.authentication.util import verify_pass
 from apps.dataroutes.util import Uploader
@@ -188,38 +190,113 @@ def data():
 
 
 
-@blueprint.route('/dashboard/')
+@blueprint.route('/dashboard/', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-
     #check for role
     if current_user.is_admin():
         #db acccesses needed to admin
-        pass
+        existing_requests_requests_joinedwith_users_datastacks = (
+        db.session.query(SubscriptionRequests, Datastacks, Users)
+        .join(Datastacks, SubscriptionRequests.data_requested_id == Datastacks.id)
+        .join(Users, SubscriptionRequests.user_id == Users.id) 
+        .order_by(desc(SubscriptionRequests.creation_date))
+        .all()
+        )
+        edit_profile_form = EditAccountForm(request.form)
+        approval_rejection_form = ApprovalRejectionForm(request.form)
+
+        
+        if request.method == "POST":
+            if 'req_approved' in request.form:
+                #process Approved request
+                print('CLICKED APPROVED')
+                message="The attempt to accept the request was processed successfully"
+                try:
+                    request_id = int(request.form['req_request_id'])
+                    #check if it exists in requests for the current user and is in pending state only but later
+                    subscribed_request = SubscriptionRequests.query.filter_by(request_id=request_id ).first()
+                    if subscribed_request:
+                        if subscribed_request.status_of_request == 'accepted':
+                            message="An error occurred while processing the previous request as this request is already approved"
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        elif subscribed_request.status_of_request == 'rejected':
+                            message="You cannot approve a request that is is previously rejected. The user will have to generate a new request for this datastack to be approved"
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        elif subscribed_request.status_of_request=='pending':
+                            request_form_cleaned = request.form.copy()
+                            request_form_cleaned['updated_date'] =datetime.utcnow()
+                            request_form_cleaned['status_of_request']='accepted'
+                            request_form_cleaned['approver_rejector_id']=current_user.id
+                            request_form_cleaned['remarks'] = cleaned(request.form['req_remarks'])
+
+                            subscribed_request.updated_date = request_form_cleaned['updated_date']
+                            subscribed_request.status_of_request= request_form_cleaned['status_of_request']
+                            subscribed_request.approver_rejector_id = request_form_cleaned['approver_rejector_id']
+                            subscribed_request.remarks= request_form_cleaned['remarks']
+                            db.session.commit()  # Save changes
+                    if not subscribed_request:
+                        message="An error occurred while processing the previous request. Kindly try again"
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                    #end check
+                except Exception as e:
+                    print(e)
+                    message="An unknown error occurred while processing the previous request. Kindly try again"
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+            elif 'req_rejected' in request.form:
+                #Process rejected request
+                print('CLICKED REJECTED')
+                message="The attempt to reject the request was processed successfully"
+                try:
+                    request_id = int(request.form['req_request_id'])
+                    
+                    #check if it exists in requests for the current user and is in pending state only but later
+                    subscribed_request = SubscriptionRequests.query.filter_by(request_id=request_id ).first()
+                    if subscribed_request:
+                        if subscribed_request.status_of_request == 'rejected':
+                            message="An error occurred while processing the previous request as this request is already rejected"
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        elif subscribed_request.status_of_request == 'accepted':
+                            message="You cannot reject a request that is is previously accepted."
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        
+                        elif subscribed_request.status_of_request=='pending':
+                            request_form_cleaned = request.form.copy()
+                            request_form_cleaned['updated_date'] =datetime.utcnow()
+                            request_form_cleaned['status_of_request']='rejected'
+                            request_form_cleaned['approver_rejector_id']=current_user.id
+                            request_form_cleaned['remarks'] = cleaned(request.form['req_remarks'])
+
+                            subscribed_request.updated_date = request_form_cleaned['updated_date']
+                            subscribed_request.status_of_request= request_form_cleaned['status_of_request']
+                            subscribed_request.approver_rejector_id = request_form_cleaned['approver_rejector_id']
+                            subscribed_request.remarks= request_form_cleaned['remarks']
+                            db.session.commit()  # Save changes
+                    if not subscribed_request:
+                        message="An error occurred while processing the previous request. Kindly try again"
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                    #end check
+                    
+                except Exception as e:
+                    print(e)
+                    message="An unknown error occurred while processing the previous request. Kindly try again"
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+
+            return render_template('home/admin-dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+        else: #GET REQUEST
+            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form)
+
     else:
-        #db accesses needed to user
-        pass
-    
-    existing_requests_requests_joinedwith_datastacks = (
+        existing_requests_requests_joinedwith_datastacks = (
         db.session.query(SubscriptionRequests, Datastacks)
         .join(Datastacks, SubscriptionRequests.data_requested_id == Datastacks.id)
         .filter(SubscriptionRequests.user_id == current_user.id)
         .order_by(desc(SubscriptionRequests.creation_date))
         .all()
-    )
-    #print(existing_requests_requests_joinedwith_datastacks)
-   
-    #existing_requests = SubscriptionRequests.query.filter_by(user_id=current_user.id).all()
-
-    #requests_with_users = db.session.query(SubscriptionRequest, User).join(User).all()
-
-    try:
-        if(current_user.id):
-            return render_template('home/dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests= existing_requests_requests_joinedwith_datastacks)
-    except Exception as e:
-        #print('Did exceptions')
-        return render_template('home/dashboard.html', segment='dashboard', user_id="", user_role = "", existing_requests= "")
-
+        )
+        edit_profile_form = EditAccountForm(request.form)
+        
+        return render_template('home/dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests= existing_requests_requests_joinedwith_datastacks, form=edit_profile_form)
 
 
 
@@ -271,7 +348,6 @@ def get_data_detailed(key):
 
 
 
-
 @blueprint.route('/request-datastack/', methods=['GET', 'POST'])
 def get_default_route_request_datastack():
     return render_template('home/page-404.html'), 404
@@ -279,6 +355,9 @@ def get_default_route_request_datastack():
 #mime = magic.Magic(mime=True) # for checking MIME types
 
 
+
+def cleaned(x):
+    return x
 
 def validate_upload_fields( authority_doc_data, identity_doc_data ,purpose):
     errors = []

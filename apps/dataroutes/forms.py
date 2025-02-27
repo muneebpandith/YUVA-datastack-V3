@@ -10,3 +10,9 @@ class CreateSubscriptionRequestForm(FlaskForm):
     authority_document = FileField('Authority document', id='authority_document', validators=[DataRequired()])
     purpose = TextAreaField('Purpose', id='purpose', validators=[DataRequired()])
 
+
+
+class ApprovalRejectionForm(FlaskForm):
+    remarks = TextAreaField('Remarks', id='req_remarks', name="req_remarks", validators=[DataRequired()])
+
+

@@ -12,8 +12,7 @@
                 </p>
             </div>
         </div>
-
-
+        
         <div class="row">
             <div class="col-12" >
                 <div class="shadow filtercardsborder details__content-tabs">
@@ -23,11 +22,13 @@
                                 Subscriptions
                             </button>
                         </li>
-                        <!-- <li class="nav-item" role="presentation">
+
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link navitemsmain" id="tab-2-tab" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1">
-                                Inbox
+                                Profile
                             </button>
                         </li>
+                        <!--
                         <li class="nav-item" role="presentation">
                             <button class="nav-link navitemsmain" id="tab-2-tab" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab" aria-controls="tab-2" aria-selected="false" tabindex="-1">
                                 Profile
@@ -183,7 +184,7 @@
                                     </div>
                                     {% endif %}
                                 {% endfor %}
-                            {% endif %}
+                                {% endif %}
                             
                                 </div>
                                 <hr>
@@ -191,17 +192,226 @@
                         </div>
     
                         <!-- Tab 2 Content -->
-                        <!-- <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
                             <div class="row">
                                 <div class="col-12">
-                                    <b style="font-family: Roboto-bold;">License Agreement : </b>
+                                    <div class="container">
+                                        <p class="text-center">
+                                        </p>
+                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/signin.svg">
+                                            <div class="col-12  align-items-center justify-content-center">
+                                                <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5">
+                                                    <div class="text-center text-md-center mb-4 mt-md-0">
+                                                        <h1 class="mb-0 h3">
+                                                            Edit Profile
+                                                        </h1>
+                                                        <br />
+                                                        <p style="color:#2fb0bf;">
+                                                            {% if msg %}
+                                                                {{ msg | safe }}
+                                                            {% else %}
+                                                                Edit your details
+                                                            {% endif %}                                     
+                                                        </p> 
+                                                    </div>
+                                                    
+                                                    {% if success %}
+                        
+                                                        <div class="d-grid">
+                                                            <a href="{{ url_for('authentication_blueprint.login') }}" 
+                                                               class="btn btn-gray-800">Sign IN</a>
+                                                        </div>
+                        
+                                                    {% else %}
+                        
+                                                        
+                                                        
+                                                        <form  method="post" action="" class="mt-4 formx">
+                                                            {{ form.hidden_tag() }}
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div>
+                                                                        <label for="first_name">First Name</label>
+                                                                        <input class="form-control" id="first_name" name="first_name" type="text" placeholder="" disabled value="{{current_user.first_name}}">
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">First name cannot be changed</li></ul>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div>
+                                                                        <label for="last_name">Last Name</label>
+
+                                                                        <input class="form-control" id="last_name" name="last_name" type="text" placeholder="Enter your last name" disabled value="{{current_user.last_name}}">
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">Last name can not be changed</li></ul>
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="date_of_birth">Date of Birth</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">
+                                                                            <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                                                        </span>
+                                                                        <input data-datepicker="" class="form-control datepicker-input" id="date_of_birth" name="date_of_birth" type="text" placeholder="dd/mm/yyyy" disabled value="{{current_user.date_of_birth}}">                                               
+                                                                      </div>
+                                                                </div>
+                        
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="type_of_organization">Type of Organization</label>
+                                                                    <select class="form-select mb-0" aria-label="Type of organization" id="type_of_organization"  name="type_of_organization">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="Government">Government</option>
+                                                                        <option value="Academic Institutes">Academic Institutes</option>
+                                                                        <option value="R&D">R&D</option>
+                                                                        <option value="Individuals">Individuals</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="name_of_organization">Name of organization</label>
+                                                                        <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" disabled value="{{current_user.name_of_organization}}"> 
+                                                                    </div>
+                                                                    <ul ><li style="font-size:10px;">Organization name must contain at least one letter and can include letters, numbers, spaces, and special characters.</li></ul>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="country">Country</label>
+                                                                    <select class="form-select mb-0" id="country" name="country" aria-label="Choose country">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="India">India</option>
+                                                
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="address">Address</label>
+                                                                        
+                                                                        <input class="form-control" id="address" name="address" type="text" placeholder="Enter your home address" disabled value="{{current_user.name_of_organization}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="gender">State</label>
+                                                                    <select class="form-select mb-0" id="state" name="state" aria-label="Choose state">
+                                                                        <option selected>Choose...</option>
+                                                                        <option value="J&K">J&K</option>
+                                                
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                        
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="city_town">City/Town</label>
+                                                                        
+                                                                        <input class="form-control" id="city_town" name="city_town" type="text" placeholder="City/Town" disabled value="{{current_user.city_town}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="city">Pincode</label>
+                                                                        {{ form.pincode(placeholder="Pincode", class="input form-control", type="text") }}
+                                                                        <!-- <input class="form-control" id="pincode" name="pincode" type="text" placeholder="Pincode" required=""> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-1">
+                                                                    <div class="form-group">
+                                                                        <label for="email">Your Email</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <span class="fas fa-envelope"></span>
+                                                                            </span>
+                                                                            {{ form.email(placeholder="Email", class="input form-control", type="email") }}
+                                                                        </div>  
+                                                                    </div>
+                                                                </div>
+                        
+                                                                <div class="col-md-6 mb-1">
+                                                                    <label for="phone">Mobile number</label>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">
+                                                                            +91
+                                                                        </span>
+                                                                        {{ form.phone(placeholder="(10 digits)", class="input form-control", type="text") }}
+                                                                        <!-- <input class="form-control" id="phone" type="text" placeholder="(10 digits)" required="">                                                -->
+                                                                      </div>
+                                                                    <!-- <div class="form-group">
+                                                                        <label for="phone">Mobile Number</label>
+                                                                        <div class="row">
+                                                                            
+                                                                            <div class="col-2" style="width:20%;"><input class="form-control" id="ccode" type="text" placeholder="+91" disabled></div>
+                                                                            <div class="col-10" style="width:80%;"><input class="form-control" id="phone" type="text" placeholder="(10 digits)" required=""></div>
+                                                                        </div>
+                                                                        
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="row">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label for="username">Set Username</label>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <span class="fas fa-user-circle"></span>
+                                                                            </span>
+                                                                            {{ form.username(placeholder="Username", class="form-control") }}
+                                                                        </div> 
+                                                                        <ul ><li style="font-size:10px;">Use at least 6 characters</li><li style="font-size:10px;">Use only letters and digits</li><li style="font-size:10px;">Do NOT use symbols or spaces</li></ul>
+                                                                        
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                            <label for="password">Set Password</label>
+                                                                        
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon2">
+                                                                                    <span class="fas fa-unlock-alt"></span>
+                                                                                </span>
+                                                                                {{ form.password(placeholder="Password", class="form-control", type="password") }}
+                                                                            </div> 
+                                                                            <ul ><li style="font-size:10px;">Use at least 8 characters</li><li style="font-size:10px;">Use one uppercase, one numeric and one lowercase and one special character</li></ul>
+                                                                </div>
+                                                                <div class="mb-4 mt-4">
+                                                                    <div class="form-check">
+                                                                        <!-- <input class="form-check-input" type="checkbox" value="" id="remember"> -->
+                                                                        <label class="form-check-label fw-normal mb-0 " for="remember">
+                                                                            By submitting, I agree to the <a href="#" class="fw-bold"><a style="color:#0875bd;">Terms & Conditions</a> and <a style="color:#0875bd;">License of Usage</a>.
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                          
+                                                            <div class="mt-3">
+                                                                <div class="d-grid">
+                                                                    <!--<button type="submit" name="edit-profile" class="btn btn-gray-800">Form</button>-->
+                                                                    EDIT PROFILE IS CURRENTLY DISABLED
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </form>
+                                                        <br />
+                                                        
+                                                    
+                                                    {% endif %}
+                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                   <a href="http://google.com">Click here</a>
-                                </div>
+                                
                                 <hr>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

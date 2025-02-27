@@ -73,14 +73,14 @@ class SubscriptionRequests(db.Model):
     creation_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     status_of_request = db.Column(db.Enum('pending', 'accepted', 'rejected', name='request_status'), default='pending', nullable=False)
-    remarks = db.Column(db.Text, nullable=True)
+    remarks = db.Column(db.String(255), nullable=True)
     approver_rejector_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=True)
     user = db.relationship('Users', foreign_keys=[user_id], backref='requests_made')
     approver_rejector = db.relationship('Users', foreign_keys=[approver_rejector_id], backref='requests_reviewed')
     datastack = db.relationship('Datastacks', foreign_keys=[data_requested_id], backref='datastacks_requests')
     document_proof = db.Column(db.String(255), nullable=True)  # Store file path
     identity_proof = db.Column(db.String(255), nullable=True)  # Store file path
-    
+    purpose = db.Column(db.String(255), nullable=True)  # Store file path
     
     status_of_request_if_subscription_model_is_paid = db.Column(db.Enum('pending', 'unpaid', 'paid', '', name='request_status_if_paid_model'), default='', nullable=False)
     cost_of_request_if_subscription_model_is_paid = db.Column(db.String(255), default='0')
