@@ -39,12 +39,36 @@ def new_admin():
             "city_town": "Srinagar",
             "pincode": "190018",
             "oauth_github": None
+            },
+            {
+            "register":"Yes",
+            "first_name": "Shahzad",
+            "last_name": "A",
+            "date_of_birth": datetime.strptime("01/01/1993", "%m/%d/%Y").date(),
+            "username": "shahzad",
+            "email": "shahzad@gmail.com",
+            "phone": "9999999999",
+            "password": "Admin@123",  # API will hash it
+            "role": 1,  # Admin user
+            "type_of_organization": "Government",
+            "name_of_organization": "Labor and Employment Department",
+            "country": "India",
+            "address": "Srinagar",
+            "state": "J&K",
+            "city_town": "Srinagar",
+            "pincode": "190001",
+            "oauth_github": None
             }
+
+
         ]
     if Users.query.first():
         print({"error": "Admin registration is disabled, as admin already exists."}), 403
     else:
         user = Users(**default_users[0])
+        db.session.add(user)
+        db.session.commit()
+        user = Users(**default_users[1])
         db.session.add(user)
         db.session.commit()
         # Delete user from session

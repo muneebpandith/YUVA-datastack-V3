@@ -32,7 +32,7 @@ apps/static/assets/yarn.lock
 apps/static/assets/.temp
 
 migrations
-
+filetype
 dataset/BaselineData
 dataset/BaselineDataTest
 dataset/BaselineDataNew
