@@ -22,7 +22,7 @@
             <div class="col-md-3">
                 <label for="dropdown1" class="form-label" style="font-family: Roboto;">Type of organization</label>
                 <select id="dropdown1" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option selected>Choose...</option>
+                    <option value="All" selected>All</option>
                     <option value="1">Government</option>
                     <option value="2">Academic Institutes</option>
                     <option value="3">R&D</option>
@@ -41,9 +41,9 @@
                 </select>
             </div> -->
             <div class="col-md-3">
-                <label for="dropdown3" class="form-label" style="font-family: Roboto;">District</label>
-                <select id="dropdown3" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option selected disabled>Select District</option>
+                <label for="dropdown2" class="form-label" style="font-family: Roboto;">District</label>
+                <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option selected value="All">All</option>
                       <option value="Jammu">Jammu</option>
                       <option value="Kathua">Kathua</option>
                       <option value="Samba">Samba</option>
@@ -68,7 +68,7 @@
                   
             </div>
             <div class="col-md-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100" style="font-family: Roboto;">Submit</button>
+                <button type="submit" class="btn btn-primary w-100" style="font-family: Roboto;" id="data-filter-submit-btn">Submit</button>
             </div>
         </div>
 
@@ -82,7 +82,18 @@
         <div class="row" id="data-container">
             
         </div>
+        <div class="row">
+            <div class="col-12" style="background-color: #fafafa; padding:20px; border-radius:3px;">
+                <nav>
+                    <ul class="pagination justify-content-center" id="data-pagination-container"></ul>
+                </nav>
+            </div>
+        </div>
+        
     </div>
+
+    
+
     
     <!-- Opportunities Section -->
     <!-- <div class="container mt-5" id="opportunities">
