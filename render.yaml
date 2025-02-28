@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: yuva-app
+    name: yuva-ds
     plan: premium
     env: python
     region: india  # region should be same as your database region.

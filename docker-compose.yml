@@ -25,10 +25,11 @@
 #   web_network:
 #     driver: bridge
 
- version: '3.8'
+#version: '3.8'
+
 services:
   yuva-app:
-    container_name: yuva_app
+    container_name: yuva_ds
     restart: always
     build: .
     networks:
@@ -47,7 +48,7 @@ services:
     networks:
       - web_network
     depends_on: 
-      - yuva-app
+      - yuva-ds
 networks:
   db_network:
     driver: bridge
