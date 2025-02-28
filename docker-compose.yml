@@ -28,7 +28,7 @@
 #version: '3.8'
 
 services:
-  yuva-app:
+  yuva-ds:
     container_name: yuva_ds
     restart: always
     build: .
