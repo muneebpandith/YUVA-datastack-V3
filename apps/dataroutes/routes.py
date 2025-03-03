@@ -4,7 +4,7 @@ from collections import Counter
 import random
 import itertools
 import re
-from flask import render_template, redirect, request, request, jsonify, url_for
+from flask import render_template, redirect, request, request, jsonify, url_for, send_file, send_from_directory
 from flask_login import (
     current_user,
     login_user,
@@ -17,10 +17,11 @@ from apps.authentication.models import Users
 from apps.dataroutes.models import Datastacks, SubscriptionRequests
 from apps.dataroutes.forms import CreateSubscriptionRequestForm, ApprovalRejectionForm
 from apps.authentication.forms import EditAccountForm
+from apps.dataroutes.forms import DatastackForm
 
 from flask_login import login_required, current_user
 from apps.authentication.util import verify_pass
-from apps.dataroutes.util import Uploader
+from apps.dataroutes.util import UploaderDownloader
 import time
 from werkzeug.utils import secure_filename
 import hashlib
@@ -31,7 +32,7 @@ from sqlalchemy import desc
 
 
 
-u = Uploader()
+u = UploaderDownloader()
 
 
 
@@ -206,6 +207,14 @@ def dashboard():
         edit_profile_form = EditAccountForm(request.form)
         approval_rejection_form = ApprovalRejectionForm(request.form)
 
+
+        existing_datastacks = Datastacks.query.all()
+        datastack_form = DatastackForm(request.form)
+
+
+        # for r in existing_datastacks:
+        #     print(r.id)
+
         
         if request.method == "POST":
             if 'req_approved' in request.form:
@@ -219,10 +228,10 @@ def dashboard():
                     if subscribed_request:
                         if subscribed_request.status_of_request == 'accepted':
                             message="An error occurred while processing the previous request as this request is already approved"
-                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks,datastack_form = datastack_form,  alert_information=message)
                         elif subscribed_request.status_of_request == 'rejected':
                             message="You cannot approve a request that is is previously rejected. The user will have to generate a new request for this datastack to be approved"
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, alert_information=message)
                         elif subscribed_request.status_of_request=='pending':
                             request_form_cleaned = request.form.copy()
                             request_form_cleaned['updated_date'] =datetime.utcnow()
@@ -237,12 +246,13 @@ def dashboard():
                             db.session.commit()  # Save changes
                     if not subscribed_request:
                         message="An error occurred while processing the previous request. Kindly try again"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form,   alert_information=message)
                     #end check
                 except Exception as e:
                     print(e)
                     message="An unknown error occurred while processing the previous request. Kindly try again"
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form,  alert_information=message)
+            
             elif 'req_rejected' in request.form:
                 #Process rejected request
                 print('CLICKED REJECTED')
@@ -255,10 +265,10 @@ def dashboard():
                     if subscribed_request:
                         if subscribed_request.status_of_request == 'rejected':
                             message="An error occurred while processing the previous request as this request is already rejected"
-                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, alert_information=message)
                         elif subscribed_request.status_of_request == 'accepted':
                             message="You cannot reject a request that is is previously accepted."
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, alert_information=message)
                         
                         elif subscribed_request.status_of_request=='pending':
                             request_form_cleaned = request.form.copy()
@@ -274,17 +284,17 @@ def dashboard():
                             db.session.commit()  # Save changes
                     if not subscribed_request:
                         message="An error occurred while processing the previous request. Kindly try again"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form,  alert_information=message)
                     #end check
                     
                 except Exception as e:
                     print(e)
                     message="An unknown error occurred while processing the previous request. Kindly try again"
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, alert_information=message)
 
-            return render_template('home/admin-dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, alert_information=message)
+            return render_template('home/admin-dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, alert_information=message)
         else: #GET REQUEST
-            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form)
+            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form)
 
     else:
         existing_requests_requests_joinedwith_datastacks = (
@@ -298,6 +308,23 @@ def dashboard():
         
         return render_template('home/dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests= existing_requests_requests_joinedwith_datastacks, form=edit_profile_form)
 
+
+
+
+
+@blueprint.route('/dashboard/documents/<param>/view', methods=['GET'])
+@login_required
+def dashboard_viewdocs(param):
+    try:
+        if current_user.is_admin():
+            #print('Displaying PDF')
+            if u.check_pdf_exists(param):
+                return send_from_directory(u.return_static_saving_path(), param)
+        else:
+            return redirect('home/index')
+    except Exception as e:
+        return jsonify({'error':str(e)})
+        return redirect('home/index')
 
 
 @blueprint.route('/data/<key>/')

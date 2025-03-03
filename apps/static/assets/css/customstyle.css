@@ -340,10 +340,12 @@ transform: scale(1.05);
 
 #labelx{
   font-family: Roboto-bold;
+  color:#000;
  }
  
 .labelx{
   font-family: Roboto-bold;
+
  }
 
  .formx{

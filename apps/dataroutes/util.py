@@ -2,8 +2,10 @@ from werkzeug.utils import secure_filename
 import os
 from apps.config import Config
 import filetype
+import time
+import random
 
-class Uploader:
+class UploaderDownloader:
     
     def __init__(self):
         self.c = Config()
@@ -35,6 +37,18 @@ class Uploader:
         elif not kind.mime in validated_filetypes:
             return False
         return True    
-            
+    def check_pdf_exists(self, fn):
+        try:
+            if fn in list(os.listdir(self.saving_path)):
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+
+ 
+    def return_static_saving_path(self):
+        print('sendiong',os.path.abspath(self.saving_path) )
+        return str(os.path.abspath(self.saving_path))
 
 
