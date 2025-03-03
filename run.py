@@ -32,7 +32,7 @@ Migrate(app, db)
 print('*** Debug is :', DEBUG)
 if not DEBUG:
     #print("777")
-    Minify(app=app, html=True, js=False, cssless=False)
+    Minify(app=app, html=True, js=True, cssless=True)
 
 
     app.logger.info('DEBUG            = ' + str(DEBUG)             )
