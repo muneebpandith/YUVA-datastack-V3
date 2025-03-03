@@ -19,6 +19,6 @@ blinker==1.6.2
 pandas
 waitress
 python-magic
-
+filetype
 # flask_mysqldb
 # psycopg2-binary

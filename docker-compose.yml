@@ -1,33 +1,8 @@
-# version: '3.8'
-# services:
-#   yuva-app:
-#     container_name: yuva_app
-#     restart: always
-#     build: .
-#     networks:
-#       - db_network
-#       - web_network
-#   nginx:
-#     container_name: nginx
-#     restart: always
-#     image: "nginx:latest"
-#     ports:
-#       - "8080:8080"
-#     volumes:
-#       - ./nginx:/etc/nginx/conf.d
-#     networks:
-#       - web_network
-#     depends_on: 
-#       - yuva-app
-# networks:
-#   db_network:
-#     driver: bridge
-#   web_network:
-#     driver: bridge
+
 
 services:
-  yuva-app:
-    container_name: yuva_app
+  yuva-ds:
+    container_name: yuva_ds
     restart: always
     build: .
     networks:
@@ -35,8 +10,8 @@ services:
       - web_network
     volumes:
       - ./:/app
-  nginx:
-    container_name: nginx
+  nginx_dsaa:
+    container_name: nginx_dsaa
     restart: always
     image: "nginx:latest"
     ports:
@@ -46,7 +21,7 @@ services:
     networks:
       - web_network
     depends_on: 
-      - yuva-app
+      - yuva-ds
 networks:
   db_network:
     driver: bridge
