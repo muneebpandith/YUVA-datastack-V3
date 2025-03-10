@@ -1,11 +1,9 @@
 {% extends "layouts/base-fullscreen.html" %}
 
 
-
-
 {% block content %}
 <body> 
-    <script src="{{ config.ASSETS_ROOT }}/js/view_datastacks.js"></script>
+
     <!-- Hero Section -->
     <div class="hero-section heading-banner">
         <div class="row text-start" style="margin-bottom:50px;">
@@ -22,30 +20,9 @@
         </div>
         <div class="row text-start">
             <div class="col-md-3">
-                <label for="dropdown1" class="form-label" style="font-family: Roboto;">Type of organization</label>
+                <label for="dropdown1" class="form-label" style="font-family: Roboto;">Functionality</label>
                 <select id="dropdown1" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option value="All" selected>All</option>
-                    <option value="1">Government</option>
-                    <option value="2">Academic Institutes</option>
-                    <option value="3">R&D</option>
-                    <option value="3">Individuals</option>
-                </select>
-            </div>
-            <!-- <div class="col-md-3">
-                <label for="dropdown2" class="form-label" style="font-family: Roboto;">Data Corpus</label>
-                <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option selected>Choose...</option>
-                    <option value="1">Houshold Heads</option>
-                    <option value="2">Individual Members</option>
-                    <option value="3">Potential Entrepreneurs (Unemployed)</option>
-                    <option value="3">Potential Entrepreneurs (Unregistered Activities)</option>
-                    <option value="3">Potential Entrepreneurs (Employed)</option>
-                </select>
-            </div> -->
-            <div class="col-md-3">
-                <label for="dropdown2" class="form-label" style="font-family: Roboto;">District</label>
-                <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option selected value="All">All</option>
+                    <option value="All">All</option>
                       <option value="Jammu">Jammu</option>
                       <option value="Kathua">Kathua</option>
                       <option value="Samba">Samba</option>
@@ -66,6 +43,40 @@
                       <option value="Baramulla">Baramulla</option>
                       <option value="Bandipora">Bandipora</option>
                       <option value="Kupwara">Kupwara</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="dropdown2" class="form-label" style="font-family: Roboto;">Functionality</label>
+                <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option value="All" selected>All</option>
+                    <option value="employment_status">Employment Status & Workforce by Age Group, Gender and Districts</option>
+                    <option value="education_skill">Education & Skill Readiness by Age Group, Gender and Districts</option>
+                    <option value="student_profile">Student Profile & Education Levels across Districts</option>
+                    <option value="social_economic">Social & Economic Profile</option>
+                    <option value="business_profile">Business Profile by Sectors</option>
+                    <option value="financial_aspects">Financial Aspects by financial health (Profitable vs Loss)</option>
+                    <option value="training_needs">Training Needs by NIC Code</option>
+                </select>
+            </div>
+            <!-- <div class="col-md-3">
+                <label for="dropdown2" class="form-label" style="font-family: Roboto;">Data Corpus</label>
+                <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option selected>Choose...</option>
+                    <option value="1">Houshold Heads</option>
+                    <option value="2">Individual Members</option>
+                    <option value="3">Potential Entrepreneurs (Unemployed)</option>
+                    <option value="3">Potential Entrepreneurs (Unregistered Activities)</option>
+                    <option value="3">Potential Entrepreneurs (Employed)</option>
+                </select>
+            </div> -->
+            <div class="col-md-3">
+                <label for="dropdown3" class="form-label" style="font-family: Roboto;">Type of Individuals</label>
+                <select id="dropdown3" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option value="All">All Individuals</option>
+                    <option value="pee">Potential Entrepreneurs Employed (PEE)</option>
+                    <option value="peur">Potential Entrepreneurs Unregistered Activities (PEUR)</option>
+                    <option value="peu">Potential Entrepreneurs Unemployed (PEU)</option>
+                    <option value="nape">Not Applicable</option>
                   </select>
                   
             </div>
@@ -93,7 +104,8 @@
         </div>
         
     </div>
-   
+
+
     
 
     
@@ -104,7 +116,7 @@
     </div> -->
     
     <!-- Footer -->
+    <script src="{{ config.ASSETS_ROOT }}/js/view_datastacks.js"></script>
 {% endblock content %}  
-
     
    

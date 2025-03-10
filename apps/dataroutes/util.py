@@ -6,11 +6,14 @@ import time
 import random
 
 class UploaderDownloader:
-    
+
     def __init__(self):
         self.c = Config()
         self.saving_path = '.'+self.c.UPLOADS_ROOT
-        
+        self.saving_path_assets = self.c.ASSETS_ROOT
+        self.code_root = self.c.CODE_ROOT
+
+        #print('THUMBNAIL SAVING AT', "."+self.code_root+self.saving_path_assets+"/images/")
         if not os.path.exists(self.saving_path ):
             os.makedirs(self.saving_path )
 
@@ -19,6 +22,14 @@ class UploaderDownloader:
             df.save(self.saving_path+"/"+fn)
             #print('SAVING IN',self.saving_path+"/"+fn )
             return "0", fn
+        except Exception as e:
+            return "1", e
+
+    def upload_thumbnail(self, fn = "dummy.png", df = ""):
+        try:
+            df.save("."+self.code_root+self.saving_path_assets+"/images/"+fn)
+            #print('SAVING IN',self.saving_path+"/"+fn )
+            return "0", self.saving_path_assets+"/images/"+fn
         except Exception as e:
             return "1", e
 
@@ -37,6 +48,7 @@ class UploaderDownloader:
         elif not kind.mime in validated_filetypes:
             return False
         return True    
+    
     def check_pdf_exists(self, fn):
         try:
             if fn in list(os.listdir(self.saving_path)):

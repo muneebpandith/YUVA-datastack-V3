@@ -13,25 +13,24 @@ class Datastacks(db.Model):
     id                = db.Column(db.Integer, primary_key=True)
     datastack_name    = db.Column(db.String(128), nullable=False)  # 'name' from API
     api_url           = db.Column(db.String(256), nullable=True)
-    basic_info        = db.Column(db.Text, nullable=True)
-    detailed_info     = db.Column(db.Text, nullable=True)
+    basic_info        = db.Column(db.String(500), nullable=True)
+    detailed_info     = db.Column(db.String(2000), nullable=True)
     provider          = db.Column(db.String(128), nullable=True)
     thumbnail         = db.Column(db.String(256), nullable=True)
-    url               = db.Column(db.String(256), nullable=True)
+    url               = db.Column(db.String(512), nullable=False)
     metadata_url      = db.Column(db.String(256), nullable=True)
     version           = db.Column(db.String(64), nullable=True)
     date_published    = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    last_updated      = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    sample_data_url   = db.Column(db.String(256), nullable=True)
-    license_url       = db.Column(db.String(256), nullable=True)
-    cost_of_service   = db.Column(db.String(255), default='0', nullable=True)
+    last_updated      = db.Column(db.DateTime, default=datetime.utcnow, nullable=True)
+    sample_data_url   = db.Column(db.String(512), nullable=True)
+    license_url       = db.Column(db.String(512), nullable=True)
+    cost_of_service   = db.Column(db.String(256), default='0', nullable=True)
     # JSON fields (store as text, convert in Python)
-    keywords           = db.Column(db.Text, nullable=True)  # Store as JSON string
-    data_fields        = db.Column(db.Text, nullable=True)  # Store as JSON string
-    subscription_model = db.Column(db.Text, nullable=True)  # Store as JSON string
-    approval_based_model = db.Column(db.Text, nullable=True)
+    keywords           = db.Column(db.String(2000), nullable=True)  # Store as JSON string
+    data_fields        = db.Column(db.String(2000), nullable=True)  # Store as JSON string
+    subscription_model = db.Column(db.Text, default="Free", nullable=True)  # Store as JSON string
+    approval_based_model = db.Column(db.Text, default="yes", nullable=True)
     
-
     def to_dict(self):
         """Convert model instance to dictionary for API response"""
         return {
@@ -58,11 +57,11 @@ class Datastacks(db.Model):
 
     def get_keywords(self):
         """Convert JSON string to list"""
-        return self.keywords.split(",") if self.keywords else []
+        return self.keywords.split(";") if self.keywords else []
 
     def get_data_fields(self):
         """Convert JSON string to list"""
-        return self.data_fields.split(",") if self.data_fields else []
+        return self.data_fields.split(";") if self.data_fields else []
         
         
 class SubscriptionRequests(db.Model):

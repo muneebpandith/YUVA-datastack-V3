@@ -223,8 +223,8 @@
                                             </div>
                                             
                                             <div class="modal-footer">
-                                                <a href="{{ url_for('authentication_blueprint.login') }}"><button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button></a>
-                                                <a href="{{ url_for('authentication_blueprint.register') }}"> <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button></a>
+                                                <button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button>
+                                                <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button>
                                             </div>
                                         </form>
                                     </div>
@@ -381,7 +381,7 @@
                                     <div class="container">
                                         <p class="text-center">
                                         </p>
-                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/signin.svg">
+                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/login.jpg">
                                             <div class="col-12  align-items-center justify-content-center">
                                                 <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5">
                                                     <div class="text-center text-md-center mb-4 mt-md-0">
@@ -601,22 +601,24 @@
                             <div class="modal fade" id="modalViewDatastack" tabindex="-1" aria-labelledby="modalViewDatastackLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="max-width:80%;">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Edit Datastack</h5>
+                                    <div class="modal-header" style="background:#a1b3b0";>
+                                      <h5 class="modal-title" id="exampleModalLabel">VIEW DATASTACK</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
-                                            {{datastack_form.hidden_tag() }}
+                                        <form method="post" enctype="multipart/form-data"  class="" style="padding-left:20px; padding-right:20px;">
+                                            {{view_datastack_form.hidden_tag()}}
                                             <div class="row" style="text-align: left;">
                                                 <div class="col-12  p-1">
-                                                    <label id="labelx" for="first_name" class="labelx">Datastack Name</label>
+                                                    <label id="labelx" for="first_name" class="labelx">
+                                                        Datastack Name </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <span class="fas fa-database"></span>
                                                         </span>
                                                         
-                                                        <input class="form-control" id="view_datastack_name" name="view_datastack_name" type="text" disabled="">
+                                                        {{ view_datastack_form.view_datastack_name(placeholder="Datastack name", class="input form-control disabled", type="text", disabled=True) }}
                                                         <!-- <span class="input-group-text" id="basic-addon1">
                                                             <a href="" id="view_datastack_url" name="view_datastack_url" target="_blank"><span class="fa-solid fa-link"></span>&nbsp; Click to view datastack details</a>
                                                         </span> -->
@@ -625,22 +627,26 @@
                                             </div>
                                             <div class="row" style="text-align: left;" >   
                                                 <div class="col-md-6 p-1">
-                                                    <label id="labelx" for="last_name">Datastack Basic Info</label>
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Basic Info 
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <textarea class="form-control" id="view_datastack_basic_info" name="view_datastack_basic_info" type="text" disabled=""> </textarea>                                              
+                                                        {{ view_datastack_form.view_basic_info(placeholder="Basic Info", class="input form-control", type="text", disabled=True) }}                                           
                                                     </div>
                                                       
                                                 </div>
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="last_name">Datastack Detailed Info</label>
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Detailed Info 
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <textarea class="form-control" id="view_datastack_detailed_info" name="view_datastack_detailed_info" type="text" disabled=""> </textarea>                                          
+                                                        {{ view_datastack_form.view_detailed_info(placeholder="Detailed Info", class="input form-control", type="text", disabled=True) }}                                          
                                                     </div>
                                                    
                                                 </div>
@@ -649,23 +655,27 @@
                                             <div class="row" style="text-align: left;">
                                                 
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="name_of_organization">Datastack Provider</label>
+                                                    <label id="labelx" for="name_of_organization">
+                                                        Datastack Provider
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
                                                             <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <input class="form-control" id="view_datastack_provider" name="view_datastack_provider" type="text" disabled="">                                               
+                                                        {{ view_datastack_form.view_provider(placeholder="Provider (e.g., Mission YUVA)", class="input form-control", type="text", disabled=True) }}                                              
                                                     </div>
                                                    
                                                 </div>
                                                 
                         
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="type_of_organization">Thumbnail</label>
+                                                    <label id="labelx" for="type_of_organization">
+                                                        Thumbnail
+                                                    </label>
                                                     <div class="input-group">
-                                                        
-                                                        <!-- IMG SRC HERE-->
-                                                        <input class="form-control" id="view_datastack_thumbnail" name="view_datastack_thumbnail" type="text" disabled="">                                               
+                                                        <div class="input-group-text">
+                                                            <a id="view_thumbnail" name="view_thumbnail" target="_blank">Click to view <span class="fa-solid fa-link text-danger"></span></a>
+                                                        </div>
                                                     </div>
                                                     
                                                 </div>
@@ -676,28 +686,29 @@
 
                                             <div class="row" style="text-align: left;">
                                                 
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="name_of_organization">Datastack Keywords</label>
+                                                <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Keywords 
+                                                    </label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
-                                                        <input class="form-control" id="view_datastack_keywords" name="view_datastack_keywords" type="text" disabled="">                                               
+                                                        <div id="keywords-container" class="keywords-container form-control">
+                                                            {{ view_datastack_form.view_keywords(placeholder="Keywords (semicolon ; separated)", class="input", type="text", disabled=True) }} 
+                                                        </div>
                                                     </div>
-                                                   
                                                 </div>
-                                                
+
+
                         
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="type_of_organization">Data fields</label>
+                                                 <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Data Fields 
+
+                                                    </label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
-                                                        <!-- IMG SRC HERE-->
-                                                        <input class="form-control" id="view_datastack_data_fields" name="view_datastack_data_fields" type="text" disabled="">                                               
+                                                        <div id="datafields-container" class="datafields-container form-control">
+                                                            {{ view_datastack_form.view_data_fields(placeholder="Data fields (semicolon ; separated)", class="input", type="text", disabled=True) }} 
+                                                        </div>
                                                     </div>
-                                                    
                                                 </div>
                                                 
                                                 
@@ -709,89 +720,92 @@
                         
                         
                         
-                                                <div class="col-md-6  p-1">
+                                                <div class="col-4 p-1">
                                                     <div class="form-group">
-                                                        <label id="labelx" for="authority_document">
-                                                            Datastack URL
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Datastack URL  (ACTUAL DATA)
                                                         </label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text">
-                                                                <a id="view_datastack_url" name="view_datastack_url" target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
-                                                            </span>
+                                                            <div class="input-group-text">
+                                                                <a id="view_url" name="view_url" target="_blank">Click to view <span class="fa-solid fa-link text-danger"></span></a>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Sample Datastack URL (SAMPLE DATA) 
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-text">
+                                                                <a id="view_sample_data_url" name="view_sample_data_url" target="_blank">Click to view <span class="fa-solid fa-link text-danger"></span></a>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div class="col-4  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            URL for Metadata of Datastack
+                                                        </label>
+                
+                                                        <div class="input-group">
+                                                            <div class="input-group-text">
+                                                                <a id="view_metadata_url" name="view_metadata_url" target="_blank">Click to view <span class="fa-solid fa-link text-danger"></span></a
+                                                            ></div>
                                                             
                                                         </div>
                                                        
                                                     </div>
                                                     
                                                 </div>
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="identity_document">Metadata URL (Optional)</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text bg-gray">
-                                                                <a id="view_datastack_metadata_url" name="view_datastack_metadata_url"  target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
-                                                            </span>
-                                                        </div>
-                                                        <!--form.name_of_organization(placeholder="Name of Organization", class="input form-control", type="text")-->
-                                                        <!-- <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" required=""> -->
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="row" style="text-align: left;">
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="email">Version</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-envelope"></span>
-                                                        </span>
-                                                        <input class="form-control" id="view_datastack_version" name="view_datastack_version" type="text" disabled="">                                               
-                                                    </div>
-                                                   
-                                                </div>
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="phone">Date Published</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-calendar"></span>
-                                                        </span>
-                                                        <input class="form-control" id="view_datastack_date_published" name="view_datastack_date_published" type="text" disabled="">                                               
-                                                    </div>
-                                                    
-                                                </div>
 
+                                                
+                        
+                                        
+                                                
                                             </div>
 
                                             <div class="row" style="text-align: left;">
                                                 <div class="col-md-4  p-1">
-                                                    <label id="labelx" for="phone">Subscription Model </label>
+                                                    <label id="labelx" for="phone">
+                                                        Subscription Model  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
                                                             Paid/Free
                                                         </span>
-                                                        <input class="form-control" id="view_datastack_subscription_model" name="view_datastack_subscription_model" type="text" disabled="">                                               
+                                                        {{ view_datastack_form.view_subscription_model(placeholder="Subscription Model (JSON format)", class="input form-control", type="text", disabled=True) }}                                             
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="col-md-4  p-1">
-                                                    <label id="labelx" for="phone">Cost of Service</label>
+                                                    <label id="labelx" for="phone">
+                                                        Cost of Service
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
-                                                            Default 0
+                                                            In Rupees
                                                         </span>
-                                                        <input class="form-control" id="view_datastack_cost_of_service" name="view_datastack_cost_of_service" type="text" disabled="">                                               
+                                                        {{ view_datastack_form.view_cost_of_service(placeholder="Cost of Service", class="input form-control", type="text",disabled=True) }}                                               
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="col-md-4  p-1">
-                                                    <label id="labelx" for="phone">Approval Required?</label>
+                                                    <label id="labelx" for="phone">
+                                                        Approval Required?
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
                                                             Yes/No
                                                         </span>
-                                                        <input class="form-control" id="view_datastack_approval_model" name="view_datastack_approval_model" type="text" disabled="">                                               
+                                                        {{ view_datastack_form.view_approval_based_model(placeholder="Approval Based Model (JSON format)", class="input form-control", type="text", disabled=True) }}                                              
                                                     </div>
                                                     
                                                 </div>
@@ -799,12 +813,22 @@
                                             </div>
                                             
                                             <div class="modal-footer">
+                                               
                                             </div>
                                         </form>
                                     </div>
                                     
                                   </div>
+                                  
+                                
                                 </div>
+                                <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
                             </div>
                             <div class="modal fade" id="modalAddDatastack" tabindex="-1" aria-labelledby="modalAddDatastackLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="max-width:80%;">
@@ -814,9 +838,8 @@
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
-                                            {{datastack_form.hidden_tag() }}
-                                            
+                                        <form method="post" enctype="multipart/form-data"  class="" style="padding-left:20px; padding-right:20px;">
+                                            {{datastack_form.hidden_tag()}}
                                             <div class="row" style="text-align: left;">
                                                 <div class="col-12  p-1">
                                                     <label id="labelx" for="first_name" class="labelx">
@@ -883,7 +906,7 @@
                                                     </label>
                                                     <div class="input-group">
                                                         <!-- IMG SRC HERE-->
-                                                        {{ datastack_form.thumbnail(class="form-control", type="file") }}                                               
+                                                        {{ datastack_form.thumbnail(class="form-control") }}                                               
                                                     </div>
                                                     
                                                 </div>
@@ -1039,6 +1062,7 @@
                                             </div>
                                             
                                             <div class="modal-footer">
+                                               <button type="submit" id="add_datastack" name="add_datastack" class="btn btn-success"> <span class="fas fa-check me-2"></span>Submit</button>
                                                
                                             </div>
                                         </form>
@@ -1136,7 +1160,7 @@
                                                         </td>
                                                         <td><span class="fw-normal">{{ex_ds.basic_info}}</span></td>                        
                                                         <td><span class="fw-bold">{{ex_ds.provider}}</span></td>
-                                                        <td><span class="fw-bold">{{ex_ds.url}}</span></td>                                          
+                                                        <td><span class="fw-bold" style="font-size:18px;"><a href="{{ex_ds.url}}" target="_blank"><span class="fa-solid fa-link text-danger"></span></a></span></td>                                     
                                                         <td>
                                                             <div class="btn-group">
                                                                 <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1147,7 +1171,7 @@
                                                                 </button>
                                                                 <div class="dropdown-menu py-0">
                                                                     <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#modalViewDatastack"  onclick="modalViewDatastack(this);" data-ds-id="{{ex_ds.id}}" data-ds-name="{{ex_ds.datastack_name}}" data-ds-api-url="{{ex_ds.api_url}}" data-ds-basic-info="{{ex_ds.basic_info}}" data-ds-detailed-info="{{ex_ds.detailed_info}}" data-ds-provider="{{ex_ds.provider}}" data-ds-thumbnail="{{ex_ds.thumbnail}}" data-ds-url="{{ex_ds.url}}" data-ds-metadata-url="{{ex_ds.metadata_url}}" data-ds-version="{{ex_ds.version}}" data-ds-date-published="{{ex_ds.date_published}}" data-ds-last-updated="{{ex_ds.last_updated}}" data-ds-sample-data-url="{{ex_ds.sample_data_url}}"  data-ds-sample-data-url="{{ex_ds.sample_data_url}}" data-ds-license-url="{{ex_ds.license_url}}" data-ds-cos="{{ex_ds.cost_of_service}}" data-ds-keywords="{{ex_ds.keywords}}" data-ds-data-fields="{{ex_ds.data_fields}}" data-ds-subscription-model="{{ex_ds.subscription_model}}" data-ds-approval-based-model="{{ex_ds.approval_based_model}}" ><span class="fa-solid fa-street-view"></span>View Datastack</a>
-                                                                    <a class="dropdown-item text-success" data-bs-toggle="modal" onclick="modalEditDatastack(this);"><span class="fas fa-edit me-2"></span> Edit Datastack</a>
+                                                                    <!-- <a class="dropdown-item text-success" data-bs-toggle="modal" onclick="modalEditDatastack(this);"><span class="fas fa-edit me-2"></span> Edit Datastack</a> -->
                                                                     
                                                                 </div>
                                                             </div>
@@ -1266,45 +1290,63 @@
             //document.getElementById('modal_ds_id').value = dsId;
             document.getElementById('view_datastack_name').value = dsName;
             //document.getElementById('modal_ds_api_url').value = dsApiUrl;
-            document.getElementById('view_datastack_basic_info').value = dsBasicInfo;
-            document.getElementById('view_datastack_detailed_info').value = dsDetailedInfo;
-            document.getElementById('view_datastack_provider').value = dsProvider;
-            document.getElementById('view_datastack_url').href = dsUrl;
-            document.getElementById('view_datastack_metadata_url').href = dsMetadataUrl;
-            document.getElementById('view_datastack_version').value = dsVersion;
-            document.getElementById('view_datastack_date_published').value = formatDate(dsDatePublished);
+            document.getElementById('view_basic_info').value = dsBasicInfo;
+            document.getElementById('view_detailed_info').value = dsDetailedInfo;
+            document.getElementById('view_provider').value = dsProvider;
+            
+            document.getElementById('view_thumbnail').href = dsThumbnail;
+            document.getElementById('view_keywords').value = dsKeywords;
+            document.getElementById('view_data_fields').value = dsDataFields;
+            //document.getElementById('view_date_published').value = formatDate(dsDatePublished);
             //document.getElementById('view_datastack_last_updated').value = dsLastUpdated;
-            //document.getElementById('modal_ds_sample_data_url').value = dsSampleDataUrl;
-            //document.getElementById('modal_ds_license_url').value = dsLicenseUrl;
-            document.getElementById('view_datastack_cost_of_service').value = dsCos;
-            document.getElementById('view_datastack_keywords').value = dsKeywords;
-            document.getElementById('view_datastack_data_fields').value = dsDataFields;
-            document.getElementById('view_datastack_subscription_model').value = dsSubscriptionModel;
-            document.getElementById('view_datastack_approval_model').value = dsApprovalBasedModel;
-            document.getElementById('view_datastack_thumbnail').value = dsThumbnail;
+            document.getElementById('view_url').href = dsUrl;
+
+            if (dsMetadataUrl != "")
+            {
+                document.getElementById('view_metadata_url').href = dsMetadataUrl;
+            }
+            else{
+                document.getElementById('view_metadata_url').innerHTML = 'Not available';
+            }
+            
+            if (dsSampleDataUrl != "")
+            {
+                document.getElementById('view_sample_data_url').href = dsSampleDataUrl;
+            }
+            else{
+                document.getElementById('view_sample_data_url').innerHTML = 'Not available';
+            }
+            
+            //document.getElementById('view_license_url').value = dsLicenseUrl;
+            document.getElementById('view_cost_of_service').value = dsCos;
+            
+            document.getElementById('view_subscription_model').value = dsSubscriptionModel;
+            document.getElementById('view_approval_based_model').value = dsApprovalBasedModel;
+            document.getElementById('view_thumbnail').value = dsThumbnail;
 
         }
 
 
         function formatDate(dateString) {
-            let dateObj = new Date(dateString);  // Convert string to Date object
+            let dateObj = new Date(dateString+'Z');  // Convert string to Date object
             
             let options = { year: 'numeric', month: 'long', day: 'numeric' };
-            let formattedDate = dateObj.toLocaleDateString('en-US', options);
+            let formattedDate = dateObj.toLocaleDateString(undefined, options);
 
             let timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
-            let formattedTime = dateObj.toLocaleTimeString('en-US', timeOptions);
+            let formattedTime = dateObj.toLocaleTimeString(undefined, timeOptions);
 
             return `${formattedDate} at ${formattedTime}`;
         }
 
         // Find the span and update its content dynamically
-        document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     // Format and display dates
     document.querySelectorAll("[data-date]").forEach(el => {  
         let rawDate = el.getAttribute("data-date");  
         if (rawDate !== "") {
-            el.innerText = formatDate(rawDate) + " (UTC)";
+            //el.innerText = formatDate(rawDate) + " (UTC)";
+            el.innerText = formatDate(rawDate);
         }
     });
 

@@ -50,6 +50,7 @@ class Config(object):
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3') 
 
     # Assets Management
+    CODE_ROOT = os.getenv('CODE_ROOT', '/apps') 
     ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')    
     CURRENT_YEAR =  datetime.utcnow().year
 

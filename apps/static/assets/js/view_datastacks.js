@@ -1,3 +1,4 @@
+
         document.addEventListener("DOMContentLoaded", function () {
             let allData = []; // Store full dataset for filtering
             let filteredData = []; // Store filtered data for pagination
@@ -7,6 +8,8 @@
             const container = document.getElementById("data-container");
             const dropdown1 = document.getElementById("dropdown1");
             const dropdown2 = document.getElementById("dropdown2");
+            const dropdown3 = document.getElementById("dropdown3");
+            
             const submitButton = document.getElementById("data-filter-submit-btn");
             const paginationContainer = document.getElementById("data-pagination-container");
         
@@ -64,13 +67,14 @@
             function filterCards() {
                 const selected1 = dropdown1.value;
                 const selected2 = dropdown2.value;
+                const selected3 = dropdown3.value;
         
                 filteredData = allData.filter(dataset => {
                     const keywords = dataset.keywords;
                     const match1 = selected1 && selected1 !== "All" ? keywords.includes(selected1) : true;
                     const match2 = selected2 && selected2 !== "All" ? keywords.includes(selected2) : true;
-        
-                    return match1 && match2;
+                    const match3 = selected3 && selected3 !== "All" ? keywords.includes(selected3) : true;
+                    return match1 && match2 && match3;
                 });
         
                 currentPage = 1; // Reset to first page after filtering

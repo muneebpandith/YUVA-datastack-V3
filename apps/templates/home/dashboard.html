@@ -198,7 +198,7 @@
                                     <div class="container">
                                         <p class="text-center">
                                         </p>
-                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/signin.svg">
+                                        <div class="row justify-content-center form-bg-image" data-background-lg="{{ config.ASSETS_ROOT }}/img/illustrations/login.jpg">
                                             <div class="col-12  align-items-center justify-content-center">
                                                 <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5">
                                                     <div class="text-center text-md-center mb-4 mt-md-0">
@@ -422,13 +422,13 @@
     </div>
     <script>
         function formatDate(dateString) {
-            let dateObj = new Date(dateString);  // Convert string to Date object
+            let dateObj = new Date(dateString+'Z');  // Convert string to Date object
             
             let options = { year: 'numeric', month: 'long', day: 'numeric' };
-            let formattedDate = dateObj.toLocaleDateString('en-US', options);
+            let formattedDate = dateObj.toLocaleDateString(undefined, options);
 
             let timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
-            let formattedTime = dateObj.toLocaleTimeString('en-US', timeOptions);
+            let formattedTime = dateObj.toLocaleTimeString(undefined, timeOptions);
 
             return `${formattedDate} at ${formattedTime}`;
         }
@@ -438,7 +438,7 @@
             document.querySelectorAll("[data-date]").forEach(el => {  
             let rawDate = el.getAttribute("data-date");  
             if (rawDate!=="")
-                el.innerText = formatDate(rawDate) + " (UTC)";
+                el.innerText = formatDate(rawDate);
             });
 });
     </script>
