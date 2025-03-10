@@ -691,7 +691,8 @@
                                                         Keywords 
                                                     </label>
                                                     <div class="input-group">
-                                                        <div id="keywords-container" class="keywords-container form-control">
+                                                        <div id="view-keywords-container" class="keywords-container form-control">
+
                                                             {{ view_datastack_form.view_keywords(placeholder="Keywords (semicolon ; separated)", class="input", type="text", disabled=True) }} 
                                                         </div>
                                                     </div>
@@ -705,7 +706,7 @@
 
                                                     </label>
                                                     <div class="input-group">
-                                                        <div id="datafields-container" class="datafields-container form-control">
+                                                        <div id="view-datafields-container" class="datafields-container form-control">
                                                             {{ view_datastack_form.view_data_fields(placeholder="Data fields (semicolon ; separated)", class="input", type="text", disabled=True) }} 
                                                         </div>
                                                     </div>
@@ -923,7 +924,7 @@
                                                     </label>
                                                     <div class="input-group">
                                                         <div id="keywords-container" class="keywords-container form-control">
-                                                            {{ datastack_form.keywords(placeholder="Keywords (semicolon ; separated)", class="input", type="text") }} 
+                                                            {{ datastack_form.keywords_shower(placeholder="Keywords (semicolon ; separated)", class="input", type="text", id="keywords_shower") }} 
                                                         </div>
                                                     </div>
                                                 </div>
@@ -950,10 +951,12 @@
                                                     </label>
                                                     <div class="input-group">
                                                         <div id="datafields-container" class="datafields-container form-control">
-                                                            {{ datastack_form.data_fields(placeholder="Data fields (semicolon ; separated)", class="input", type="text") }} 
+                                                            {{ datastack_form.data_fields_shower(placeholder="Data fields (semicolon ; separated)", class="input", type="text",  id="data_fields_shower") }} 
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+                                                
                                                 
                                                 
                                                 
@@ -1062,7 +1065,7 @@
                                             </div>
                                             
                                             <div class="modal-footer">
-                                               <button type="submit" id="add_datastack" name="add_datastack" class="btn btn-success"> <span class="fas fa-check me-2"></span>Submit</button>
+                                               <button type="submit" id="add_datastack" name="add_datastack" class="btn btn-success"> <span class="fas fa-check me-2" onclick="parse_keywords();"></span>Submit</button>
                                                
                                             </div>
                                         </form>
@@ -1090,7 +1093,7 @@
                                             
                                             <div class="d-block mb-4 mb-md-0">
                                                 
-                                                <a data-bs-toggle="modal" data-bs-target="#modalAddDatastack"  onclick="modalAddDatastack(this);"> <button class="btn btn-success" style="color:#fff; font-weight: bold;">Add Datastack</button></a>
+                                                <a data-bs-toggle="modal" data-bs-target="#modalAddDatastack"> <button class="btn btn-success" style="color:#fff; font-weight: bold;">Add Datastack</button></a>
                                             </div>
                                             <!-- <div class="btn-toolbar mb-2 mb-md-0">
                                                 <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
@@ -1227,6 +1230,12 @@
     </div>
     
     <script>
+
+
+function parse_keywords()
+{
+
+}
         function modalbox(x)
         {
             let request_id = x.getAttribute("data-request-id");
@@ -1308,7 +1317,7 @@
             else{
                 document.getElementById('view_metadata_url').innerHTML = 'Not available';
             }
-            
+
             if (dsSampleDataUrl != "")
             {
                 document.getElementById('view_sample_data_url').href = dsSampleDataUrl;
@@ -1319,7 +1328,6 @@
             
             //document.getElementById('view_license_url').value = dsLicenseUrl;
             document.getElementById('view_cost_of_service').value = dsCos;
-            
             document.getElementById('view_subscription_model').value = dsSubscriptionModel;
             document.getElementById('view_approval_based_model').value = dsApprovalBasedModel;
             document.getElementById('view_thumbnail').value = dsThumbnail;
@@ -1339,85 +1347,95 @@
             return `${formattedDate} at ${formattedTime}`;
         }
 
+
+
+
+
+        
         // Find the span and update its content dynamically
     document.addEventListener("DOMContentLoaded", function () {
-    // Format and display dates
-    document.querySelectorAll("[data-date]").forEach(el => {  
-        let rawDate = el.getAttribute("data-date");  
-        if (rawDate !== "") {
-            //el.innerText = formatDate(rawDate) + " (UTC)";
-            el.innerText = formatDate(rawDate);
-        }
-    });
-
-    const tagsContainer = document.getElementById("keywords-container");
-    const tagsInput = document.getElementById("keywords");
-
-
-    
-    tagsInput.addEventListener("keydown", function (event) {
-        // Capture Enter or Comma to add a tag
-        if (event.key === "Enter" || event.key === ";") {
-            event.preventDefault();
-
-            // Get the current input value and remove any trailing comma
-            const tagValue = tagsInput.value.trim().replace(/;$/, "");
-
-            // Only allow non-empty, unique tags
-            if (tagValue && !isTagAlreadyAdded(tagValue, tagsContainer)) {
-                addTag(tagValue, tagsInput, tagsContainer);
-                tagsInput.value = ""; // Clear the input field
+            document.querySelectorAll("[data-date]").forEach(el => {  
+            let rawDate = el.getAttribute("data-date");  
+            if (rawDate !== "") {
+                //el.innerText = formatDate(rawDate) + " (UTC)";
+                el.innerText = formatDate(rawDate);
             }
+        });
+    setupTaggingSystem("keywords-container", "keywords_shower", "keywords");
+    setupTaggingSystem("datafields-container", "data_fields_shower", "data_fields");
+
+    function setupTaggingSystem(containerId, inputId, hiddenInputName) {
+        const tagsContainer = document.getElementById(containerId);
+        const tagsInput = document.getElementById(inputId);
+        
+        if (!tagsContainer || !tagsInput) {
+            console.error(`Element(s) missing: #${containerId} or #${inputId}`);
+            return;
         }
-    });
 
-    const tagsContainer2 = document.getElementById("datafields-container");
-    const tagsInput2 = document.getElementById("data_fields");
+        const hiddenInput = document.createElement("input"); // Hidden input field
+        hiddenInput.type = "hidden";
+        hiddenInput.name = hiddenInputName;
+        hiddenInput.id = hiddenInputName;
+        tagsContainer.appendChild(hiddenInput);
 
-    tagsInput2.addEventListener("keydown", function (event) {
-        // Capture Enter or Comma to add a tag
-        if (event.key === "Enter" || event.key === ";") {
-            event.preventDefault();
-
-            // Get the current input value and remove any trailing comma
-            const tagValue2 = tagsInput2.value.trim().replace(/;$/, "");
-
-            // Only allow non-empty, unique tags
-            if (tagValue2 && !isTagAlreadyAdded(tagValue2, tagsContainer2)) {
-                addTag(tagValue2, tagsInput2, tagsContainer2);
-                tagsInput2.value = ""; // Clear the input field
+        // Handle Enter or Semicolon
+        tagsInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === ";") {
+                event.preventDefault();
+                processTags(tagsInput.value, tagsContainer, tagsInput, hiddenInput);
             }
-        }
-    });
+        });
 
-
-
-
-
-    function addTag(tagValueX, tagsInputX, tagsContainerX) {
-        const tagElementX = document.createElement("div");
-        tagElementX.classList.add("tag");
-        tagElementX.innerHTML = `<span>${tagValueX}</span> <i class="fa-solid fa-xmark remove-tag"></i>`;
-
-        // Append the new tag to the container before the input
-        tagsContainerX.insertBefore(tagElementX, tagsInputX);
-
-        // Add event listener to remove tag
-        tagElementX.querySelector(".remove-tag").addEventListener("click", function () {
-            tagsContainerX.removeChild(tagElementX);
+        // Handle Paste (Command + V or Ctrl + V)
+        tagsInput.addEventListener("paste", function (event) {
+            event.preventDefault();
+            let pastedText = (event.clipboardData || window.clipboardData).getData("text");
+            processTags(pastedText, tagsContainer, tagsInput, hiddenInput);
         });
     }
 
-    function isTagAlreadyAdded(tagValueX, tagsContainerX) {
-        const existingTags = tagsContainerX.getElementsByClassName("tag");
-        for (let tag of existingTags) {
-            if (tag.firstChild.textContent.trim() === tagValueX) {
-                return true;
+    function processTags(inputText, tagsContainerX, tagsInputX, hiddenInputX) {
+        const tagValues = inputText.split(";").map(tag => tag.trim()).filter(tag => tag);
+        tagValues.forEach(tagValue => {
+            if (!isTagAlreadyAdded(tagValue, tagsContainerX)) {
+                addTag(tagValue, tagsContainerX, hiddenInputX);
             }
-        }
-        return false;
+        });
+        tagsInputX.value = ""; // Clear input field
+        updateHiddenInput(tagsContainerX, hiddenInputX);
     }
-});
+
+    function addTag(tagValueX, tagsContainerX, hiddenInputX) {
+    const tagElementX = document.createElement("div");
+    tagElementX.classList.add("tag");
+    tagElementX.innerHTML = `<span>${tagValueX}</span> <i class="fa-solid fa-xmark remove-tag"></i>`;
+
+    // Insert the tag before the input field inside the container
+    const inputField = tagsContainerX.querySelector("textarea");
+    tagsContainerX.insertBefore(tagElementX, inputField);
+
+    // Add event listener to remove tag
+    tagElementX.querySelector(".remove-tag").addEventListener("click", function () {
+        tagsContainerX.removeChild(tagElementX);
+        updateHiddenInput(tagsContainerX, hiddenInputX);
+    });
+
+    updateHiddenInput(tagsContainerX, hiddenInputX);
+}
+
+
+    function isTagAlreadyAdded(tagValueX, tagsContainerX) {
+        return [...tagsContainerX.getElementsByClassName("tag")].some(tag => tag.firstChild.textContent.trim() === tagValueX);
+    }
+
+    function updateHiddenInput(tagsContainerX, hiddenInputX) {
+        const tagValues = [...tagsContainerX.getElementsByClassName("tag")].map(tag => tag.firstChild.textContent.trim());
+        hiddenInputX.value = tagValues.join(";");
+    }
+        });
+
+
 
 
 

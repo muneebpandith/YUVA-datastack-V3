@@ -82,12 +82,13 @@
 
                                                     <div class="col-4 bg-white text-black p-3">Date Requested<br><span id="formattedDates" style="font-family: Roboto-bold;" data-date="{{r.creation_date}}"></span></div>
                                                     <div class="col-4  bg-white text-black p-3">Date of Approval<br><span id="formattedDates" style="font-family: Roboto-bold;" data-date="{{r.updated_date}}"></span></div>
-                                                    <div class="col-4 bg-white text-black p-3"><a href="{{d.url}}" target="_blank"><button class="btn btn-warning">CLICK TO DOWNLOAD</button></a></div>
+                                                    <div class="col-4 bg-white text-black p-3"><a href="{{d.url}}" target="_blank"><button class="btn btn-warning">CLICK TO VIEW/DOWNLOAD</button></a><br></div>
                                                 </div>
                                                 <div class="row" style="border-top:1px solid rgb(215, 213, 213);">
                                                     <div class="col bg-white text-black p-3">
                                                         <span>Remarks: </span>
-                                                        <span style="font-family: Roboto-bold;">{{r.remarks}}</span>
+                                                        <span style="font-family: Roboto-bold;">{{r.remarks}}</span><br><hr>
+                                                        <span style="font-family:'Roboto-bold'";> Note:</span> This Datastack is enabled to be viewed/downloaded for your email address: <b>{{current_user.email}}</b>. Please make sure that you are logged onto your Google Account with the same email address. You need to create one if you don't have a Google Account with the same email address. This enables us to prevent unauthorized access to the datastack.
                                                         
                                                     </div>
                                                 </div>

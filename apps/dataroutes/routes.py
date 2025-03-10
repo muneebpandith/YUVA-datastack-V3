@@ -28,7 +28,25 @@ import hashlib
 from sqlalchemy import desc
 
 
+
+
 #import magic #for checking mime type in python
+
+
+#GOOGLE DRIVE HANDLER
+
+# Load Google Drive API credentials
+
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+SCOPES = ["https://www.googleapis.com/auth/drive"]
+SERVICE_ACCOUNT_FILE = "creds.json"  # Replace with your service account file
+
+# Authenticate with Google Drive
+credentials = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE, scopes=SCOPES
+)
+drive_service = build("drive", "v3", credentials=credentials)
 
 
 
@@ -242,18 +260,35 @@ def dashboard():
                             
 
                             ds_requested = Datastacks.query.filter_by(id=subscribed_request.data_requested_id).first()
+                            user_requested_by = Users.query.filter_by(id=subscribed_request.user_id).first()
                             
 
                             #MAKE CALL TO GDRIVE
                             # CHECK ds_url, extract file id try connecting to google api, if successful do:
-                            if True:
+                            try:
+                                file_id = extract_google_file_id(ds_requested.url)
+                                user_email = user_requested_by.email
+                                
+                                if file_id and user_email:
+                                    #print(file_id, user_email)
+                                    #make request to gdrive to add permissions for this user
+                                    permission = {
+                                        "type": "user",
+                                        "role": "reader",
+                                        "emailAddress": user_email,
+                                    }
+                                    drive_service.permissions().create(
+                                        fileId=file_id,
+                                        body=permission,
+                                        sendNotificationEmail=True,  # Send an email to the user
+                                    ).execute()
                                 subscribed_request.updated_date = request_form_cleaned['updated_date']
                                 subscribed_request.status_of_request= request_form_cleaned['status_of_request']
                                 subscribed_request.approver_rejector_id = request_form_cleaned['approver_rejector_id']
                                 subscribed_request.remarks= request_form_cleaned['remarks']
                                 db.session.commit()  # Save changes
-                            else:
-                                message="An error occurred while processing the previous request. Kindly try again. Adding Google Drive Rights Failed to this user."
+                            except Exception as e:
+                                message="An error occurred while processing the previous request. Kindly try again. Adding Google Drive Rights Failed to this user. Error: " +str(e)
                                 return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form, view_datastack_form = view_datastack_form,   alert_information=message)
 
                     if not subscribed_request:
@@ -339,6 +374,8 @@ def dashboard():
                     request_form_cleaned = request.form.copy()
                     request_form_cleaned.pop("csrf_token", None)
                     request_form_cleaned.pop("add_datastack", None)
+                    request_form_cleaned.pop("keywords_shower", None)
+                    request_form_cleaned.pop("data_fields_shower", None)
                     request_form_cleaned["api_url"] = "api/v1/data"
 
                     
