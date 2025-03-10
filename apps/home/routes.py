@@ -13,7 +13,7 @@ def index():
     return render_template('home/index.html', segment='index')
     #return render_template('home/index.html',  segment='index', user_id=current_user.id)
 
-
+    
 
 @blueprint.route('/<template>/')
 # **@login_required

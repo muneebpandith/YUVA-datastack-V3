@@ -46,7 +46,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div>
-                                                <label for="first_name">First Name</label>
+                                                <label id="labelx" for="first_name">First Name</label>
                                                 {{ form.first_name(placeholder="First name", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="first_name" name="first_name" type="text" placeholder="Enter your first name" required=""> -->
                                             </div>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div>
-                                                <label for="last_name">Last Name</label>
+                                                <label id="labelx" for="last_name">Last Name</label>
                                                 {{ form.last_name(placeholder="Last name", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="last_name" name="last_name" type="text" placeholder="Enter your last name" required=""> -->
                                             </div>
@@ -64,60 +64,64 @@
 
                                     <div class="row align-items-center">
                                         <div class="col-md-6 mb-3">
-                                            <label for="date_of_birth">Date of Birth</label>
+                                            <label id="labelx" for="date_of_birth">Date of Birth</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">
                                                     <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                                 </span>
-                                                <input data-datepicker="" class="form-control datepicker-input" id="date_of_birth" name="date_of_birth" type="text" placeholder="dd/mm/yyyy" required="">                                               
+                                                {{ form.date_of_birth(placeholder="dd-mm-yyyy", class="input form-control", type="date") }}                                               
                                               </div>
                                         </div>
 
                                         <div class="col-md-6 mb-3">
-                                            <label for="type_of_organization">Type of Organization</label>
-                                            <select class="form-select mb-0" aria-label="Type of organization" id="type_of_organization"  name="type_of_organization">
+                                            <label id="labelx" for="type_of_organization">Type of Organization</label>
+                                            <!-- <select class="form-select mb-0" aria-label="Type of organization" id="type_of_organization"  name="type_of_organization">
                                                 <option selected>Choose...</option>
                                                 <option value="Government">Government</option>
                                                 <option value="Academic Institutes">Academic Institutes</option>
                                                 <option value="R&D">R&D</option>
                                                 <option value="Individuals">Individuals</option>
-                                            </select>
+                                            </select> -->
+                                            {{ form.type_of_organization(placeholder="Type of Organization", class="input form-control") }}           
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
-                                                <label for="name_of_organization">Name of organization</label>
+                                                <label id="labelx" for="name_of_organization">Name of organization</label>
                                                 {{ form.name_of_organization(placeholder="Name of Organization", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" required=""> -->
                                             </div>
                                             <ul ><li style="font-size:10px;">Organization name must contain at least one letter and can include letters, numbers, spaces, and special characters.</li></ul>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="country">Country</label>
-                                            <select class="form-select mb-0" id="country" name="country" aria-label="Choose country">
+                                            <label id="labelx" for="country">Country</label>
+                                            <!-- <select class="form-select mb-0" id="country" name="country" aria-label="Choose country">
                                                 <option selected>Choose...</option>
                                                 <option value="India">India</option>
                         
-                                            </select>
+                                            </select> -->
+                                            {{ form.country(placeholder="Country", class="input form-control") }}
+
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
-                                                <label for="address">Address</label>
+                                                <label id="labelx" for="address">Address</label>
                                                 {{ form.address(placeholder="Address", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="address" name="address" type="text" placeholder="Enter your home address" required=""> -->
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="gender">State</label>
-                                            <select class="form-select mb-0" id="state" name="state" aria-label="Choose state">
+                                            <label id="labelx" for="state">State</label>
+                                            <!-- <select class="form-select mb-0" id="state" name="state" aria-label="Choose state">
                                                 <option selected>Choose...</option>
                                                 <option value="J&K">J&K</option>
                         
-                                            </select>
+                                            </select> -->
+                                            {{ form.state(placeholder="State", class="input form-control") }}
                                         </div>
                                     </div>
 
@@ -125,14 +129,14 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
-                                                <label for="city_town">City/Town</label>
+                                                <label id="labelx" for="city_town">City/Town</label>
                                                 {{ form.city_town(placeholder="City/Town", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="city_town" name="city_town" type="text" placeholder="City/Town" required=""> -->
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
-                                                <label for="city">Pincode</label>
+                                                <label id="labelx" for="city">Pincode</label>
                                                 {{ form.pincode(placeholder="Pincode", class="input form-control", type="text") }}
                                                 <!-- <input class="form-control" id="pincode" name="pincode" type="text" placeholder="Pincode" required=""> -->
                                             </div>
@@ -143,7 +147,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
-                                                <label for="email">Your Email</label>
+                                                <label id="labelx" for="email">Your Email</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <span class="fas fa-envelope"></span>
@@ -154,7 +158,7 @@
                                         </div>
 
                                         <div class="col-md-6 mb-3">
-                                            <label for="phone">Mobile number</label>
+                                            <label id="labelx" for="phone">Mobile number</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">
                                                     +91
@@ -163,7 +167,7 @@
                                                 <!-- <input class="form-control" id="phone" type="text" placeholder="(10 digits)" required="">                                                -->
                                               </div>
                                             <!-- <div class="form-group">
-                                                <label for="phone">Mobile Number</label>
+                                                <label id="labelx" for="phone">Mobile Number</label>
                                                 <div class="row">
                                                     
                                                     <div class="col-2" style="width:20%;"><input class="form-control" id="ccode" type="text" placeholder="+91" disabled></div>
@@ -176,7 +180,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="username">Set Username</label>
+                                            <label id="labelx" for="username">Set Username</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <span class="fas fa-user-circle"></span>
@@ -187,7 +191,7 @@
                                                 
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                                    <label for="password">Set Password</label>
+                                                    <label id="labelx" for="password">Set Password</label>
                                                 
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon2">
@@ -200,7 +204,7 @@
                                         <div class="mb-4 mt-4">
                                             <div class="form-check">
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="remember"> -->
-                                                <label class="form-check-label fw-normal mb-0 " for="remember">
+                                                <label id="labelx" class="form-check-label fw-normal mb-0 " for="remember">
                                                     By submitting, I agree to the <a href="#" class="fw-bold"><a style="color:#0875bd;">Terms & Conditions</a> and <a style="color:#0875bd;">License of Usage</a>.
                                                 </label>
                                             </div>

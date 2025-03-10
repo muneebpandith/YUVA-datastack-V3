@@ -352,3 +352,71 @@ transform: scale(1.05);
   color:black;
   text-align:left;
  }
+
+
+ .keywords-container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width:100%;
+}
+.datafields-container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.tag {
+  background-color: #c0dfd8;
+  color: rgb(0, 0, 0);
+  padding: 2px;
+  margin: 3px;
+  border-radius: 3px;
+  display: flex;
+  align-items: left;
+  height:26px;
+  font-size:14px;
+}
+.remove-tag
+{
+  margin-left:5px;
+}
+.tag span {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.keywords-container textarea {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  box-shadow:none;
+  min-width:200px;
+  
+}
+
+.keywords-container textarea::placeholder {
+  color: #888;
+}
+
+
+
+
+.datafields-container textarea {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  box-shadow:none;
+  min-width:200px;
+  
+}
+
+.datafields-container textarea::placeholder {
+  color: #888;
+}
+

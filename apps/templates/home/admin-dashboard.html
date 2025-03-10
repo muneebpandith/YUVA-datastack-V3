@@ -1,6 +1,5 @@
 {% extends "layouts/base-fullscreen.html" %}
 
-
 {% block content%}
 <body>
     
@@ -233,9 +232,8 @@
                                   </div>
                                 </div>
                             </div>
-                            
-
                             <div class="row">
+                                
                                 <div class="col-12" style="padding:20px;">
                                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                                             <div class="d-block mb-4 mb-md-0">
@@ -600,177 +598,6 @@
 
                         <!--Tab 3-->
                         <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                            <div class="modal fade" id="modalEditDatastack" tabindex="-1" aria-labelledby="modalEditDatastackLabel" aria-hidden="true">
-                                <div class="modal-dialog-datastacks" style="max-width:80%;">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Edit Datastack</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
-                                            {{approval_rejection_form.hidden_tag() }}
-                                            <input type="hidden" id="req_request_id" name="req_request_id" />
-                                            <div class="row">
-                                                <div class="col-12  p-1">
-                                                    <label id="labelx" for="first_name" class="labelx">Datastack Name</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <span class="fas fa-database"></span>
-                                                        </span>
-                                                        
-                                                        <input class="form-control" id="req_datastack_name" name="req_datastack_name" type="text" disabled="">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <a href="" id="req_datastack_url" name="req_datastack_url" target="_blank"><span class="fa-solid fa-link"></span>&nbsp; Click to see datastack details </a>
-                                                        </span>
-                                                    </div>
-                                                   </div>
-                                            </div>
-                                            <div class="row">   
-                                                <div class="col-md-6 p-1">
-                                                    <label id="labelx" for="last_name">Requesting user's First Name</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <span class="fas fa-user"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_first_name" name="req_first_name" type="text" disabled="">                                               
-                                                    </div>
-                                                      
-                                                </div>
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="last_name">Requesting user's Last Name</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <span class="fas fa-user"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_last_name" name="req_last_name" type="text" disabled="">                                               
-                                                    </div>
-                                                   
-                                                </div>
-                                            </div>
-                        
-                                            <div class="row align-items-center">
-                                                
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="name_of_organization">Name of Organization</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_name_of_organization" name="req_name_of_organization" type="text" disabled="">                                               
-                                                    </div>
-                                                   
-                                                </div>
-                                                
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="type_of_organization">Type of Organization</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_type_of_organization" name="req_type_of_organization" type="text" disabled="">                                               
-                                                    </div>
-                                                    
-                                                </div>
-                                                
-                                                
-                                                
-                                            </div>
-                        
-                                            <div class="row align-items-center">
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="email">Email address </label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-envelope"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_email" name="req_email" type="text" disabled="">                                               
-                                                    </div>
-                                                   
-                                                </div>
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="phone">Mobile Number</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            +91
-                                                        </span>
-                                                        <input class="form-control" id="req_phone" name="req_phone" type="text" disabled="">                                               
-                                                    </div>
-                                                    
-                                                </div>
-                                                
-                                                
-                                                
-                                            </div>
-                                            <div class="row">
-                        
-                        
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="authority_document">
-                                                            Authority Letter from Department
-                                                        </label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">
-                                                                <a id="req_authority_document" name="req_authority_document" target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
-                                                            </span>
-                                                            
-                                                        </div>
-                                                       
-                                                    </div>
-                                                    
-                        
-                                                    
-                                                </div>
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="identity_document">Identification Document</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text bg-gray">
-                                                                <a id="req_identity_document" name="req_identity_document"  target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
-                                                            </span>
-                                                        </div>
-                                                        <!--form.name_of_organization(placeholder="Name of Organization", class="input form-control", type="text")-->
-                                                        <!-- <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" required=""> -->
-                                                    </div>
-                                                   
-                                                   
-                                                </div>
-                                                
-                                            </div>
-                        
-                                            <div class="row">
-                                                <div class="col-12  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="purpose">Purpose</label>
-                                                        <textarea class="input form-control" id="req_purpose" name="req_purpose" type="text" disabled></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                        
-                                            <div class="row">
-                                                <div class="col-12  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="remarks">REMARKS</label>
-                                                        <textarea class="input form-control" id="req_remarks" name="req_remarks" placeholder="Enter remarks for approval or rejection" required="" type="text"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="modal-footer">
-                                                <a href="{{ url_for('authentication_blueprint.login') }}"><button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button></a>
-                                                <a href="{{ url_for('authentication_blueprint.register') }}"> <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button></a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                  </div>
-                                </div>
-                            </div>
                             <div class="modal fade" id="modalViewDatastack" tabindex="-1" aria-labelledby="modalViewDatastackLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="max-width:80%;">
                                   <div class="modal-content">
@@ -781,7 +608,6 @@
                                     <div class="modal-body">
                                         <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
                                             {{datastack_form.hidden_tag() }}
-                                            <input type="hidden" id="req_request_id" name="req_request_id" />
                                             <div class="row" style="text-align: left;">
                                                 <div class="col-12  p-1">
                                                     <label id="labelx" for="first_name" class="labelx">Datastack Name</label>
@@ -837,9 +663,7 @@
                                                 <div class="col-md-6  p-1">
                                                     <label id="labelx" for="type_of_organization">Thumbnail</label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
+                                                        
                                                         <!-- IMG SRC HERE-->
                                                         <input class="form-control" id="view_datastack_thumbnail" name="view_datastack_thumbnail" type="text" disabled="">                                               
                                                     </div>
@@ -975,8 +799,6 @@
                                             </div>
                                             
                                             <div class="modal-footer">
-                                                <a href="{{ url_for('authentication_blueprint.login') }}"><button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button></a>
-                                                <a href="{{ url_for('authentication_blueprint.register') }}"> <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button></a>
                                             </div>
                                         </form>
                                     </div>
@@ -985,75 +807,83 @@
                                 </div>
                             </div>
                             <div class="modal fade" id="modalAddDatastack" tabindex="-1" aria-labelledby="modalAddDatastackLabel" aria-hidden="true">
-                                <div class="modal-dialog-datastacks" style="max-width:80%;">
+                                <div class="modal-dialog" style="max-width:80%;">
                                   <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Add Datastack</h5>
+                                    <div class="modal-header" style="background:#a1b3b0";>
+                                      <h5 class="modal-title" id="exampleModalLabel">ADD DATASTACK</h5>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form method="post" action="" class="" style="padding-left:20px; padding-right:20px;">
-                                            {{approval_rejection_form.hidden_tag() }}
-                                            <input type="hidden" id="req_request_id" name="req_request_id" />
-                                            <div class="row">
+                                            {{datastack_form.hidden_tag() }}
+                                            
+                                            <div class="row" style="text-align: left;">
                                                 <div class="col-12  p-1">
-                                                    <label id="labelx" for="first_name" class="labelx">Datastack Name</label>
+                                                    <label id="labelx" for="first_name" class="labelx">
+                                                        Datastack Name  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <span class="fas fa-database"></span>
                                                         </span>
                                                         
-                                                        <input class="form-control" id="req_datastack_name" name="req_datastack_name" type="text" disabled="">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <a href="" id="req_datastack_url" name="req_datastack_url" target="_blank"><span class="fa-solid fa-link"></span>&nbsp; Click to see datastack details </a>
-                                                        </span>
+                                                        {{ datastack_form.datastack_name(placeholder="Datastack name", class="input form-control", type="text") }}
+                                                        <!-- <span class="input-group-text" id="basic-addon1">
+                                                            <a href="" id="view_datastack_url" name="view_datastack_url" target="_blank"><span class="fa-solid fa-link"></span>&nbsp; Click to view datastack details</a>
+                                                        </span> -->
                                                     </div>
                                                    </div>
                                             </div>
-                                            <div class="row">   
+                                            <div class="row" style="text-align: left;" >   
                                                 <div class="col-md-6 p-1">
-                                                    <label id="labelx" for="last_name">Requesting user's First Name</label>
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Basic Info  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
-                                                            <span class="fas fa-user"></span>
+                                                            <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <input class="form-control" id="req_first_name" name="req_first_name" type="text" disabled="">                                               
+                                                        {{ datastack_form.basic_info(placeholder="Basic Info", class="input form-control", type="text") }}                                           
                                                     </div>
                                                       
                                                 </div>
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="last_name">Requesting user's Last Name</label>
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Detailed Info  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
-                                                            <span class="fas fa-user"></span>
+                                                            <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <input class="form-control" id="req_last_name" name="req_last_name" type="text" disabled="">                                               
+                                                        {{ datastack_form.detailed_info(placeholder="Detailed Info", class="input form-control", type="text") }}                                          
                                                     </div>
                                                    
                                                 </div>
                                             </div>
                         
-                                            <div class="row align-items-center">
+                                            <div class="row" style="text-align: left;">
                                                 
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="name_of_organization">Name of Organization</label>
+                                                    <label id="labelx" for="name_of_organization">
+                                                        Datastack Provider <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
                                                             <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <input class="form-control" id="req_name_of_organization" name="req_name_of_organization" type="text" disabled="">                                               
+                                                        {{ datastack_form.provider(placeholder="Provider (e.g., Mission YUVA)", class="input form-control", type="text") }}                                              
                                                     </div>
                                                    
                                                 </div>
                                                 
                         
                                                 <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="type_of_organization">Type of Organization</label>
+                                                    <label id="labelx" for="type_of_organization">
+                                                        Thumbnail <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-file-signature"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_type_of_organization" name="req_type_of_organization" type="text" disabled="">                                               
+                                                        <!-- IMG SRC HERE-->
+                                                        {{ datastack_form.thumbnail(class="form-control", type="file") }}                                               
                                                     </div>
                                                     
                                                 </div>
@@ -1061,105 +891,182 @@
                                                 
                                                 
                                             </div>
-                        
-                                            <div class="row align-items-center">
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="email">Email address </label>
+
+                                            <div class="row" style="text-align: left;">
+                                                
+                                                <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Keywords  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
                                                     <div class="input-group">
-                                                        <span class="input-group-text">
-                                                            <span class="fas fa-envelope"></span>
-                                                        </span>
-                                                        <input class="form-control" id="req_email" name="req_email" type="text" disabled="">                                               
+                                                        <div id="keywords-container" class="keywords-container form-control">
+                                                            {{ datastack_form.keywords(placeholder="Keywords (semicolon ; separated)", class="input", type="text") }} 
+                                                        </div>
                                                     </div>
-                                                   
                                                 </div>
-                        
-                                                <div class="col-md-6  p-1">
-                                                    <label id="labelx" for="phone">Mobile Number</label>
+
+
+                                                <!-- 
+                                                 <div class="col-md-6 p-1">
+                                                    <label id="labelx" for="data_fields_label">Keywords</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text">
-                                                            +91
+                                                            <span class="fas fa-file-signature"></span>
                                                         </span>
-                                                        <input class="form-control" id="req_phone" name="req_phone" type="text" disabled="">                                               
+                                                        <div id="keywords-container" class="keywords-container">
+                                                            {{ datastack_form.keywords(placeholder="Keywords (comma-separated)", class="input", type="text") }} 
+                                                        </div>
                                                     </div>
-                                                    
+                                                </div>
+                                                 -->
+                        
+                                                 <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Data Fields  <span style="font-weight: normal; font-size:14px;"> (The list of columns of the datastack separated by ; semicolon)</span> <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div id="datafields-container" class="datafields-container form-control">
+                                                            {{ datastack_form.data_fields(placeholder="Data fields (semicolon ; separated)", class="input", type="text") }} 
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 
                                                 
                                                 
                                             </div>
-                                            <div class="row">
+                        
+                                            
+                                            <div class="row" style="text-align: left;">
                         
                         
                         
-                                                <div class="col-md-6  p-1">
+                                                <div class="col-12  p-1">
                                                     <div class="form-group">
-                                                        <label id="labelx" for="authority_document">
-                                                            Authority Letter from Department
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Datastack URL  (ACTUAL DATA) <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
                                                         </label>
                                                         <div class="input-group">
                                                             <span class="input-group-text">
-                                                                <a id="req_authority_document" name="req_authority_document" target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
+                                                                External Link/ GDrive 
                                                             </span>
+                                                            {{ datastack_form.url(placeholder="Example https://drive.google.com/", class="input form-control", type="text") }}
+                                                            
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Sample Datastack URL (SAMPLE DATA)  <span style="font-weight: normal; color:rgb(0, 122, 86); font-size:14px;"> (Optional) </span>
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">
+                                                                External Link/ GDrive 
+                                                            </span>
+                                                            {{ datastack_form.sample_data_url(placeholder="Example https://drive.google.com/", class="input form-control", type="text") }}
                                                             
                                                         </div>
                                                        
                                                     </div>
                                                     
-                        
+                                                </div>
+
+                                                <div class="col-12  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            URL for Metadata of Datastack (DOCUMENT FOR DESCRIPTION OF DATAFIELDS) <span style="font-weight: normal; color:rgb(0, 122, 86); font-size:14px;"> (Optional) </span>
+                                                        </label>
+                
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">
+                                                                External Link/ GDrive 
+                                                            </span>
+                                                            {{ datastack_form.metadata_url(placeholder="Example https://drive.google.com/", class="input form-control", type="text") }}
+                                                            
+                                                        </div>
+                                                       
+                                                    </div>
                                                     
                                                 </div>
+
+                                                
                         
-                                                <div class="col-md-6  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="identity_document">Identification Document</label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text bg-gray">
-                                                                <a id="req_identity_document" name="req_identity_document"  target="_blank">Click to view <span class="fa-solid fa-file-pdf text-danger"></span></a>
-                                                            </span>
-                                                        </div>
-                                                        <!--form.name_of_organization(placeholder="Name of Organization", class="input form-control", type="text")-->
-                                                        <!-- <input class="form-control" id="name_of_organization" name="name_of_organization" type="text" placeholder="Name of organization" required=""> -->
-                                                    </div>
-                                                   
-                                                   
-                                                </div>
+                                        
                                                 
                                             </div>
-                        
-                                            <div class="row">
-                                                <div class="col-12  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="purpose">Purpose</label>
-                                                        <textarea class="input form-control" id="req_purpose" name="req_purpose" type="text" disabled></textarea>
+
+                                            <div class="row" style="text-align: left;">
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Subscription Model  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            Paid/Free
+                                                        </span>
+                                                        {{ datastack_form.subscription_model(placeholder="Subscription Model (JSON format)", class="input form-control", type="text") }}                                             
                                                     </div>
+                                                    
                                                 </div>
-                                            </div>
-                        
-                                            <div class="row">
-                                                <div class="col-12  p-1">
-                                                    <div class="form-group">
-                                                        <label id="labelx" for="remarks">REMARKS</label>
-                                                        <textarea class="input form-control" id="req_remarks" name="req_remarks" placeholder="Enter remarks for approval or rejection" required="" type="text"></textarea>
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Cost of Service <span style="font-weight: normal; font-size:14px;"> (Fill if subscription model is Paid)</span> <span style="font-weight: normal; color:rgb(0, 122, 86); font-size:14px;"> (Optional) </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            In Rupees
+                                                        </span>
+                                                        {{ datastack_form.cost_of_service(placeholder="Cost of Service", class="input form-control", type="text") }}                                               
                                                     </div>
+                                                    
                                                 </div>
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Approval Required?  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> (* Required) </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            Yes/No
+                                                        </span>
+                                                        {{ datastack_form.approval_based_model(placeholder="Approval Based Model (JSON format)", class="input form-control", type="text") }}                                              
+                                                    </div>
+                                                    
+                                                </div>
+
                                             </div>
                                             
                                             <div class="modal-footer">
-                                                <a href="{{ url_for('authentication_blueprint.login') }}"><button type="submit" id="req_approved" name="req_approved" class="btn btn-success"> <span class="fas fa-check me-2"></span>Approve</button></a>
-                                                <a href="{{ url_for('authentication_blueprint.register') }}"> <button type="submit" id="req_rejected" name="req_rejected" class="btn btn-danger"> <span class="fas fa-ban me-2"></span>Reject </button></a>
+                                               
                                             </div>
                                         </form>
                                     </div>
                                     
                                   </div>
+                                  
+                                
                                 </div>
+                                <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
                             </div>
+     
                             <div class="row">
+                                
                                 <div class="col-12" style="padding:20px;">
+                                       
                                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+                                            
+                                            
                                             <div class="d-block mb-4 mb-md-0">
                                                 
+                                                <a data-bs-toggle="modal" data-bs-target="#modalAddDatastack"  onclick="modalAddDatastack(this);"> <button class="btn btn-success" style="color:#fff; font-weight: bold;">Add Datastack</button></a>
                                             </div>
                                             <!-- <div class="btn-toolbar mb-2 mb-md-0">
                                                 <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
@@ -1393,13 +1300,87 @@
 
         // Find the span and update its content dynamically
         document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll("[data-date]").forEach(el => {  
-            let rawDate = el.getAttribute("data-date");  
-            if (rawDate!=="")
-                el.innerText = formatDate(rawDate) + " (UTC)";
-            });
+    // Format and display dates
+    document.querySelectorAll("[data-date]").forEach(el => {  
+        let rawDate = el.getAttribute("data-date");  
+        if (rawDate !== "") {
+            el.innerText = formatDate(rawDate) + " (UTC)";
+        }
+    });
+
+    const tagsContainer = document.getElementById("keywords-container");
+    const tagsInput = document.getElementById("keywords");
+
+
+    
+    tagsInput.addEventListener("keydown", function (event) {
+        // Capture Enter or Comma to add a tag
+        if (event.key === "Enter" || event.key === ";") {
+            event.preventDefault();
+
+            // Get the current input value and remove any trailing comma
+            const tagValue = tagsInput.value.trim().replace(/;$/, "");
+
+            // Only allow non-empty, unique tags
+            if (tagValue && !isTagAlreadyAdded(tagValue, tagsContainer)) {
+                addTag(tagValue, tagsInput, tagsContainer);
+                tagsInput.value = ""; // Clear the input field
+            }
+        }
+    });
+
+    const tagsContainer2 = document.getElementById("datafields-container");
+    const tagsInput2 = document.getElementById("data_fields");
+
+    tagsInput2.addEventListener("keydown", function (event) {
+        // Capture Enter or Comma to add a tag
+        if (event.key === "Enter" || event.key === ";") {
+            event.preventDefault();
+
+            // Get the current input value and remove any trailing comma
+            const tagValue2 = tagsInput2.value.trim().replace(/;$/, "");
+
+            // Only allow non-empty, unique tags
+            if (tagValue2 && !isTagAlreadyAdded(tagValue2, tagsContainer2)) {
+                addTag(tagValue2, tagsInput2, tagsContainer2);
+                tagsInput2.value = ""; // Clear the input field
+            }
+        }
+    });
+
+
+
+
+
+    function addTag(tagValueX, tagsInputX, tagsContainerX) {
+        const tagElementX = document.createElement("div");
+        tagElementX.classList.add("tag");
+        tagElementX.innerHTML = `<span>${tagValueX}</span> <i class="fa-solid fa-xmark remove-tag"></i>`;
+
+        // Append the new tag to the container before the input
+        tagsContainerX.insertBefore(tagElementX, tagsInputX);
+
+        // Add event listener to remove tag
+        tagElementX.querySelector(".remove-tag").addEventListener("click", function () {
+            tagsContainerX.removeChild(tagElementX);
+        });
+    }
+
+    function isTagAlreadyAdded(tagValueX, tagsContainerX) {
+        const existingTags = tagsContainerX.getElementsByClassName("tag");
+        for (let tag of existingTags) {
+            if (tag.firstChild.textContent.trim() === tagValueX) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
+
+
+
     </script>
+    
     
     <!-- Search and Filter -->
 

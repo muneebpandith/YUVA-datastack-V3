@@ -80,11 +80,12 @@ def validate_fields(request_form):
 
     # Validate Date of Birth (Must be a valid date and user should be at least 18)
     try:
-        dob = datetime.strptime(date_of_birth, "%m/%d/%Y").date()
+        dob = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
         age = (datetime.today().date() - dob).days // 365
         if age < 18:
             errors.append("You must be at least 18 years old to register.")
-    except ValueError:
+    except Exception as e:
+        print(e)
         errors.append("Invalid date format for Date of Birth.")
 
     # # Validate Country (Required, only letters, max 64 chars)
@@ -200,7 +201,7 @@ def register():
 
         request_form_cleaned = request.form.copy()
         if isinstance(request_form_cleaned['date_of_birth'], str):
-            request_form_cleaned['date_of_birth'] = datetime.strptime(request_form_cleaned['date_of_birth'], "%m/%d/%Y").date()
+            request_form_cleaned['date_of_birth'] = datetime.strptime(request_form_cleaned['date_of_birth'], "%Y-%m-%d").date()
 
 
         # else we can create the user
