@@ -17,7 +17,7 @@ from apps.authentication.models import Users
 from apps.dataroutes.models import Datastacks, SubscriptionRequests
 from apps.dataroutes.forms import CreateSubscriptionRequestForm, ApprovalRejectionForm
 from apps.authentication.forms import EditAccountForm
-from apps.dataroutes.forms import DatastackForm, ViewDatastackForm
+from apps.dataroutes.forms import DatastackForm, ViewDatastackForm, EditDatastackForm
 
 from flask_login import login_required, current_user
 from apps.authentication.util import verify_pass
@@ -229,6 +229,7 @@ def dashboard():
         existing_datastacks = Datastacks.query.all()
         datastack_form = DatastackForm(request.form)
         view_datastack_form = ViewDatastackForm(request.form)
+        edit_datastack_form = EditDatastackForm(request.form)
 
 
         # for r in existing_datastacks:
@@ -247,10 +248,10 @@ def dashboard():
                     if subscribed_request:
                         if subscribed_request.status_of_request == 'accepted':
                             message="An error occurred while processing the previous request as this request is already approved"
-                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                         elif subscribed_request.status_of_request == 'rejected':
                             message="You cannot approve a request that is is previously rejected. The user will have to generate a new request for this datastack to be approved"
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                         elif subscribed_request.status_of_request=='pending':
                             request_form_cleaned = request.form.copy()
                             request_form_cleaned['updated_date'] =datetime.utcnow()
@@ -289,16 +290,16 @@ def dashboard():
                                 db.session.commit()  # Save changes
                             except Exception as e:
                                 message="An error occurred while processing the previous request. Kindly try again. Adding Google Drive Rights Failed to this user. Error: " +str(e)
-                                return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form, view_datastack_form = view_datastack_form,   alert_information=message)
+                                return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form,   alert_information=message)
 
                     if not subscribed_request:
                         message="An error occurred while processing the previous request. Kindly try again"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form, view_datastack_form = view_datastack_form,   alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks,datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form,   alert_information=message)
                     #end check
                 except Exception as e:
                     print(e)
                     message="An unknown error occurred while processing the previous request. Kindly try again"
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form,  alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form,  alert_information=message)
             
             elif 'req_rejected' in request.form:
                 #Process rejected request
@@ -312,10 +313,10 @@ def dashboard():
                     if subscribed_request:
                         if subscribed_request.status_of_request == 'rejected':
                             message="An error occurred while processing the previous request as this request is already rejected"
-                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard',subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                         elif subscribed_request.status_of_request == 'accepted':
                             message="You cannot reject a request that is is previously accepted."
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                         
                         elif subscribed_request.status_of_request=='pending':
                             request_form_cleaned = request.form.copy()
@@ -331,13 +332,13 @@ def dashboard():
                             db.session.commit()  # Save changes
                     if not subscribed_request:
                         message="An error occurred while processing the previous request. Kindly try again"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form,  alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form,  alert_information=message)
                     #end check
                     
                 except Exception as e:
                     print(e)
                     message="An unknown error occurred while processing the previous request. Kindly try again"
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
             
 
             elif 'add_datastack' in request.form:
@@ -349,7 +350,7 @@ def dashboard():
                     print(errors)
                     if errors:
                        print(errors)
-                       return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=errors)
+                       return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=errors)
                     sha = hashlib.sha256()
                     thumbnail_og_name = thumbnail.filename
                     sha.update((str(time.time())+str(secure_filename(thumbnail_og_name))).encode())
@@ -357,7 +358,7 @@ def dashboard():
                     _ , thumbnail_url = u.upload_thumbnail(fn = str(current_user.id)+'-THUMBNAIL-'+str(thumbnail_url_sha), df = thumbnail)
                     if not _ == "0":
                         #print('UPLOADING ERROR!')
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information="An error occured uploading the thumbnail.")
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information="An error occured uploading the thumbnail.")
                     request_form_cleaned = request.form.copy()
                     request_form_cleaned.pop("csrf_token", None)
                     request_form_cleaned.pop("add_datastack", None)
@@ -371,33 +372,35 @@ def dashboard():
                     db.session.add(d_)
                     db.session.commit()
                     existing_datastacks = Datastacks.query.all()
+                    db.session.commit()  #change thsi if misbehaviour of commiting appears
                     message="The attempt to add the datastack was processed successfully"
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                 except Exception as e:
                     #print(e)
                     message= "An unknown error occurred while adding the datastack. Kindly try again. Detailed Error: D100: "+str(e)
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='add-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
             
             elif 'edit_datastack' in request.form:
                 try:
                     datastack_id_to_be_edited = request.form['edit_datastack_id']
                     datastack_details = Datastacks.query.filter_by(id=datastack_id_to_be_edited).first()
                     if datastack_details:
-                        thumbnail = request.files.get('edit_thumbnail')
-                        errors = validate_fields_datastack(thumbnail)
-                        if errors:
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=errors)
-                        sha = hashlib.sha256()
-                        thumbnail_url_sha = sha.hexdigest()
-                        _ , thumbnail_url = u.upload_thumbnail(fn = str(current_user.id)+'-THUMBNAIL-'+str(thumbnail_url_sha), df = thumbnail)
-                        if not _ == "0":
-                            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information="An error occured uploading the thumbnail.")
+                        # thumbnail = request.files.get('edit_thumbnail')
+                        # errors = validate_fields_datastack(thumbnail)
+                        # if errors:
+                        #     return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=errors)
+                        # sha = hashlib.sha256()
+                        # thumbnail_url_sha = sha.hexdigest()
+                        # _ , thumbnail_url = u.upload_thumbnail(fn = str(current_user.id)+'-THUMBNAIL-'+str(thumbnail_url_sha), df = thumbnail)
+                        # if not _ == "0":
+                        #     return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information="An error occured uploading the thumbnail.")
+                        #
                         request_form_cleaned = request.form.copy()
 
                         request_form_cleaned['edit_updated_date'] =datetime.utcnow()
                         request_form_cleaned["edit_version"] = str(float(datastack_details.version) + 1)
-                        request_form_cleaned["edit_thumbnail"] = thumbnail_url
-                        request_form_cleaned["edit_url"] = extract_google_file_id(request.form['edit_url'])
+                        # do not update thumbnail, request_form_cleaned["edit_thumbnail"] = thumbnail_url
+                        request_form_cleaned["edit_url"] = request.form['edit_url']
                         
                         datastack_details.keywords = request_form_cleaned["edit_keywords"]
                         datastack_details.data_fields = request_form_cleaned["edit_data_fields"]
@@ -415,18 +418,18 @@ def dashboard():
                         datastack_details.cost_of_service= request_form_cleaned["edit_cost_of_service"]
                         datastack_details.approval_based_model = request_form_cleaned["edit_approval_based_model"]
                         datastack_details.version = request_form_cleaned["edit_version"]
-                        datastack_details.thumbnail = request_form_cleaned["edit_thumbnail"]
+                        ## do nnot update thumbnail datastack_details.thumbnail = request_form_cleaned["edit_thumbnail"]
                         db.session.commit()
                         existing_datastacks = Datastacks.query.all()
                         db.session.commit()
                         message="The attempt to edit the datastack was processed successfully"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                     else:
                         message= "Datastack not edited as this is not found in the system"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                 except Exception as e:
                     message= "An unknown error occurred while editing the datastack. Kindly try again. Detailed Error: D300: "+str(e)
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                     
             elif 'delete_datastack' in request.form:
                 try:
@@ -439,18 +442,18 @@ def dashboard():
                         db.session.commit()
                         existing_datastacks = Datastacks.query.all()
                         message="The attempt to delete the datastack was processed successfully"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                     else:
                         message= "Datastack not deleted as this is not found in the system"
-                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                        return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
                 except Exception as e:
                     db.session.rollback()
                     message= "An unknown error occurred while deleting the datastack. Kindly try again. Detailed Error: D400: "+str(e)
-                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+                    return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
 
-            return render_template('home/admin-dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
+            return render_template('home/admin-dashboard.html', segment='dashboard', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form, alert_information=message)
         else: #GET REQUEST
-            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form)
+            return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='subscriptions', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form, existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, edit_datastack_form = edit_datastack_form)
 
     else:
         existing_requests_requests_joinedwith_datastacks = (

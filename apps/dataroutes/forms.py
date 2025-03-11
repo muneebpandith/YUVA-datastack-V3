@@ -60,3 +60,25 @@ class ViewDatastackForm(FlaskForm):
     view_data_fields        = TextAreaField("Data Fields (JSON format)", validators=[DataRequired()])
     view_subscription_model = SelectField("Subscription Model (JSON format)",  validators=[DataRequired()], choices=[('Free', 'Free'), ('Paid', 'Paid')])
     view_approval_based_model = SelectField("Approval Based Model (JSON format)", validators=[DataRequired()], choices=[('yes', 'Yes'), ('no', 'No')])
+
+
+
+class EditDatastackForm(FlaskForm):
+    edit_datastack_name    = StringField("Datastack Name", validators=[DataRequired()])
+    edit_api_url           = StringField("API URL", validators=[Optional()])
+    edit_basic_info        = TextAreaField("Basic Info", validators=[DataRequired()])
+    edit_detailed_info     = TextAreaField("Detailed Info", validators=[DataRequired()])
+    edit_provider          = StringField("Provider", validators=[DataRequired()])
+    edit_thumbnail         = FileField('Thumbnail', id='thumbnail', validators=[DataRequired()])
+    edit_url               = StringField("Datastack URL", validators=[DataRequired()])
+    edit_metadata_url      = StringField("Metadata URL", validators=[Optional()])
+    edit_version           = StringField("Version", validators=[Optional()])
+    edit_date_published    = DateField("Date Published", format='%Y-%m-%d', validators=[Optional()])
+    edit_last_updated      = DateField("Last Updated", format='%Y-%m-%d', validators=[Optional()])
+    edit_sample_data_url   = StringField("Sample Data URL", validators=[Optional()])
+    edit_license_url       = StringField("License URL", validators=[Optional()])
+    edit_cost_of_service   = StringField("Cost of Service", validators=[Optional()])
+    edit_keywords           = TextAreaField("Keywords (comma-separated)", validators=[DataRequired()])
+    edit_data_fields        = TextAreaField("Data Fields (JSON format)", validators=[DataRequired()])
+    edit_subscription_model = SelectField("Subscription Model (JSON format)",  validators=[DataRequired()], choices=[('Free', 'Free'), ('Paid', 'Paid')])
+    edit_approval_based_model = SelectField("Approval Based Model (JSON format)", validators=[DataRequired()], choices=[('yes', 'Yes'), ('no', 'No')])

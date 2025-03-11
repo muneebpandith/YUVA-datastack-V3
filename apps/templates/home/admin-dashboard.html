@@ -598,6 +598,243 @@
 
                         <!--Tab 3-->
                         <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+                            <div class="modal fade" id="modalEditDatastack" tabindex="-1" aria-labelledby="modalEditDatastackLabel" aria-hidden="true">
+                                <div class="modal-dialog" style="max-width:80%;">
+                                  <div class="modal-content">
+                                    <div class="modal-header" style="background:#a1b3b0";>
+                                      <h5 class="modal-title" id="exampleModalLabel">EDIT DATASTACK</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" enctype="multipart/form-data"  class="" style="padding-left:20px; padding-right:20px;">
+                                            {{edit_datastack_form.hidden_tag()}}
+                                            <input type="hidden" id="edit_datastack_id" name="edit_datastack_id">
+                                            
+                                            <div class="row" style="text-align: left;">
+                                                <div class="col-12  p-1">
+                                                    <label id="labelx" for="first_name" class="labelx">
+                                                        Datastack Name </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <span class="fas fa-database"></span>
+                                                        </span>
+                                                        
+                                                        {{ edit_datastack_form.edit_datastack_name(placeholder="Datastack name", class="input form-control disabled", type="text") }}
+                                                        <!-- <span class="input-group-text" id="basic-addon1">
+                                                            <a href="" id="edit_datastack_url" name="edit_datastack_url" target="_blank"><span class="fa-solid fa-link"></span>&nbsp; Click to view datastack details</a>
+                                                        </span> -->
+                                                    </div>
+                                                   </div>
+                                            </div>
+                                            <div class="row" style="text-align: left;" >   
+                                                <div class="col-md-6 p-1">
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Basic Info 
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <span class="fas fa-file-signature"></span>
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_basic_info(placeholder="Basic Info", class="input form-control", type="text") }}                                           
+                                                    </div>
+                                                      
+                                                </div>
+                                                <div class="col-md-6  p-1">
+                                                    <label id="labelx" for="last_name">
+                                                        Datastack Detailed Info 
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <span class="fas fa-file-signature"></span>
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_detailed_info(placeholder="Detailed Info", class="input form-control", type="text") }}                                          
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                        
+                                            <div class="row" style="text-align: left;">
+                                                
+                                                <div class="col-md-6  p-1">
+                                                    <label id="labelx" for="name_of_organization">
+                                                        Datastack Provider
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            <span class="fas fa-file-signature"></span>
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_provider(placeholder="Provider (e.g., Mission YUVA)", class="input form-control", type="text") }}                                              
+                                                    </div>
+                                                   
+                                                </div>
+                                                
+                        
+                                                <div class="col-md-6  p-1">
+                                                    <label id="labelx" for="type_of_organization">
+                                                        Thumbnail
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-text">
+                                                            <a id="edit_thumbnail" name="edit_thumbnail" target="_blank">Click to view <span class="fa-solid fa-link text-danger"></span></a>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                
+                                                
+                                            </div>
+
+                                            <div class="row" style="text-align: left;">
+                                                
+                                                <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Keywords 
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div id="view-keywords-container" class="keywords-container form-control">
+                                                            {{ edit_datastack_form.edit_keywords(placeholder="Keywords (semicolon ; separated)", class="input", type="text") }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                        
+                                                 <div class="col-12 p-1">
+                                                    <label id="labelx" for="data_fields_label">
+                                                        Data Fields 
+
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <div id="view-datafields-container" class="datafields-container form-control">
+                                                            {{ edit_datastack_form.edit_data_fields(placeholder="Data fields (semicolon ; separated)", class="input", type="text") }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                
+                                            </div>
+                        
+                                            
+                                            <div class="row" style="text-align: left;">
+                        
+                        
+                        
+                                                <div class="col-4 p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Datastack URL  (ACTUAL DATA)
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">
+                                                                <span class="fas fa-file-link"></span>
+                                                            </span>
+                                                            {{ edit_datastack_form.edit_url(class="input form-control", type="text") }}
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            Sample Datastack URL (SAMPLE DATA) 
+                                                        </label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">
+                                                                <span class="fas fa-file-link"></span>
+                                                            </span>
+                                                            {{ edit_datastack_form.edit_sample_data_url(class="input form-control", type="text") }}
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <div class="col-4  p-1">
+                                                    <div class="form-group">
+                                                        <label id="labelx" for="datastack_url_label">
+                                                            URL for Metadata of Datastack
+                                                        </label>
+                
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">
+                                                                <span class="fas fa-file-link"></span>
+                                                            </span>
+                                                            {{ edit_datastack_form.edit_metadata_url(class="input form-control", type="text") }}
+                                                            
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                
+                        
+                                        
+                                                
+                                            </div>
+
+                                            <div class="row" style="text-align: left;">
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Subscription Model  <span style="font-weight: normal; color:rgb(121, 1, 1); font-size:14px;"> </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            Paid/Free
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_subscription_model(placeholder="Subscription Model (JSON format)", class="input form-control", type="text") }}                                             
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Cost of Service
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            In Rupees
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_cost_of_service(placeholder="Cost of Service", class="input form-control", type="text") }}                                               
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-4  p-1">
+                                                    <label id="labelx" for="phone">
+                                                        Approval Required?
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">
+                                                            Yes/No
+                                                        </span>
+                                                        {{ edit_datastack_form.edit_approval_based_model(placeholder="Approval Based Model (JSON format)", class="input form-control", type="text") }}                                              
+                                                    </div>
+                                                    
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                <button type="submit" id="edit_datastack" name="edit_datastack" class="btn btn-success"> <span class="fas fa-check me-2" onclick=""></span>Edit Confirm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                  </div>
+                                  
+                                
+                                </div>
+                                <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                            </div>
                             <div class="modal fade" id="modalViewDatastack" tabindex="-1" aria-labelledby="modalViewDatastackLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="max-width:80%;">
                                   <div class="modal-content">
@@ -1338,7 +1575,7 @@ function parse_keywords()
 
         }
 
-        
+    
     function modalEditDatastack(element) {
             // Extract attributes from the clicked element
             let dsId = element.getAttribute("data-ds-id");
@@ -1363,41 +1600,27 @@ function parse_keywords()
 
             // Populate modal input fields
             //document.getElementById('modal_ds_id').value = dsId;
-            document.getElementById('view_datastack_name').value = dsName;
+            document.getElementById('edit_datastack_name').value = dsName;
             //document.getElementById('modal_ds_api_url').value = dsApiUrl;
-            document.getElementById('view_basic_info').value = dsBasicInfo;
-            document.getElementById('view_detailed_info').value = dsDetailedInfo;
-            document.getElementById('view_provider').value = dsProvider;
+            document.getElementById('edit_basic_info').value = dsBasicInfo;
+            document.getElementById('edit_detailed_info').value = dsDetailedInfo;
+            document.getElementById('edit_provider').value = dsProvider;
             
-            document.getElementById('view_thumbnail').href = dsThumbnail;
-            document.getElementById('view_keywords').value = dsKeywords;
-            document.getElementById('view_data_fields').value = dsDataFields;
-            //document.getElementById('view_date_published').value = formatDate(dsDatePublished);
-            //document.getElementById('view_datastack_last_updated').value = dsLastUpdated;
-            document.getElementById('view_url').href = dsUrl;
+            document.getElementById('edit_thumbnail').href = dsThumbnail;
+            document.getElementById('edit_keywords').value = dsKeywords;
+            document.getElementById('edit_data_fields').value = dsDataFields;
+            //document.getElementById('edit_date_published').value = formatDate(dsDatePublished);
+            //document.getElementById('edit_datastack_last_updated').value = dsLastUpdated;
+            document.getElementById('edit_url').value = dsUrl;
 
-            if (dsMetadataUrl != "")
-            {
-                document.getElementById('view_metadata_url').href = dsMetadataUrl;
-            }
-            else{
-                document.getElementById('view_metadata_url').innerHTML = 'Not available';
-            }
-
-            if (dsSampleDataUrl != "")
-            {
-                document.getElementById('view_sample_data_url').href = dsSampleDataUrl;
-            }
-            else{
-                document.getElementById('view_sample_data_url').innerHTML = 'Not available';
-            }
+            document.getElementById('edit_metadata_url').value = dsMetadataUrl;
+            document.getElementById('edit_sample_data_url').value = dsSampleDataUrl;
             
-            //document.getElementById('view_license_url').value = dsLicenseUrl;
-            document.getElementById('view_cost_of_service').value = dsCos;
-            document.getElementById('view_subscription_model').value = dsSubscriptionModel;
-            document.getElementById('view_approval_based_model').value = dsApprovalBasedModel;
-            document.getElementById('view_thumbnail').value = dsThumbnail;
-            document.getElementById('delete_datastack_id').value = dsId;
+            document.getElementById('edit_cost_of_service').value = dsCos;
+            document.getElementById('edit_subscription_model').value = dsSubscriptionModel;
+            document.getElementById('edit_approval_based_model').value = dsApprovalBasedModel;
+            document.getElementById('edit_thumbnail').value = dsThumbnail;
+            document.getElementById('edit_datastack_id').value = dsId;
 
         }
 
