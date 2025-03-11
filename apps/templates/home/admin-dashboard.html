@@ -608,6 +608,7 @@
                                     <div class="modal-body">
                                         <form method="post" enctype="multipart/form-data"  class="" style="padding-left:20px; padding-right:20px;">
                                             {{view_datastack_form.hidden_tag()}}
+                                            <input type="hidden" id="delete_datastack_id" name="delete_datastack_id">
                                             <div class="row" style="text-align: left;">
                                                 <div class="col-12  p-1">
                                                     <label id="labelx" for="first_name" class="labelx">
@@ -814,7 +815,7 @@
                                             </div>
                                             
                                             <div class="modal-footer">
-                                               
+                                                <button type="submit" id="delete_datastack" name="delete_datastack" class="btn btn-danger"> <span class="fas fa-check me-2" onclick=""></span>Delete</button>
                                             </div>
                                         </form>
                                     </div>
@@ -1174,7 +1175,9 @@
                                                                 </button>
                                                                 <div class="dropdown-menu py-0">
                                                                     <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#modalViewDatastack"  onclick="modalViewDatastack(this);" data-ds-id="{{ex_ds.id}}" data-ds-name="{{ex_ds.datastack_name}}" data-ds-api-url="{{ex_ds.api_url}}" data-ds-basic-info="{{ex_ds.basic_info}}" data-ds-detailed-info="{{ex_ds.detailed_info}}" data-ds-provider="{{ex_ds.provider}}" data-ds-thumbnail="{{ex_ds.thumbnail}}" data-ds-url="{{ex_ds.url}}" data-ds-metadata-url="{{ex_ds.metadata_url}}" data-ds-version="{{ex_ds.version}}" data-ds-date-published="{{ex_ds.date_published}}" data-ds-last-updated="{{ex_ds.last_updated}}" data-ds-sample-data-url="{{ex_ds.sample_data_url}}"  data-ds-sample-data-url="{{ex_ds.sample_data_url}}" data-ds-license-url="{{ex_ds.license_url}}" data-ds-cos="{{ex_ds.cost_of_service}}" data-ds-keywords="{{ex_ds.keywords}}" data-ds-data-fields="{{ex_ds.data_fields}}" data-ds-subscription-model="{{ex_ds.subscription_model}}" data-ds-approval-based-model="{{ex_ds.approval_based_model}}" ><span class="fa-solid fa-street-view"></span>View Datastack</a>
-                                                                    <!-- <a class="dropdown-item text-success" data-bs-toggle="modal" onclick="modalEditDatastack(this);"><span class="fas fa-edit me-2"></span> Edit Datastack</a> -->
+                                                                    <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#modalEditDatastack"  onclick="modalEditDatastack(this);" data-ds-id="{{ex_ds.id}}" data-ds-name="{{ex_ds.datastack_name}}" data-ds-api-url="{{ex_ds.api_url}}" data-ds-basic-info="{{ex_ds.basic_info}}" data-ds-detailed-info="{{ex_ds.detailed_info}}" data-ds-provider="{{ex_ds.provider}}" data-ds-thumbnail="{{ex_ds.thumbnail}}" data-ds-url="{{ex_ds.url}}" data-ds-metadata-url="{{ex_ds.metadata_url}}" data-ds-version="{{ex_ds.version}}" data-ds-date-published="{{ex_ds.date_published}}" data-ds-last-updated="{{ex_ds.last_updated}}" data-ds-sample-data-url="{{ex_ds.sample_data_url}}"  data-ds-sample-data-url="{{ex_ds.sample_data_url}}" data-ds-license-url="{{ex_ds.license_url}}" data-ds-cos="{{ex_ds.cost_of_service}}" data-ds-keywords="{{ex_ds.keywords}}" data-ds-data-fields="{{ex_ds.data_fields}}" data-ds-subscription-model="{{ex_ds.subscription_model}}" data-ds-approval-based-model="{{ex_ds.approval_based_model}}" ><span class="fa-solid fa-street-view"></span>Edit Datastack</a>
+                                                                    <!-- <a class="dropdown-item rounded-top" data-bs-toggle="modal" data-bs-target="#modalDeleteDatastack"  onclick="modalDeleteDatastack(this);" data-ds-id="{{ex_ds.id}}" data-ds-name="{{ex_ds.datastack_name}}" data-ds-api-url="{{ex_ds.api_url}}" data-ds-basic-info="{{ex_ds.basic_info}}" data-ds-detailed-info="{{ex_ds.detailed_info}}" data-ds-provider="{{ex_ds.provider}}" data-ds-thumbnail="{{ex_ds.thumbnail}}" data-ds-url="{{ex_ds.url}}" data-ds-metadata-url="{{ex_ds.metadata_url}}" data-ds-version="{{ex_ds.version}}" data-ds-date-published="{{ex_ds.date_published}}" data-ds-last-updated="{{ex_ds.last_updated}}" data-ds-sample-data-url="{{ex_ds.sample_data_url}}"  data-ds-sample-data-url="{{ex_ds.sample_data_url}}" data-ds-license-url="{{ex_ds.license_url}}" data-ds-cos="{{ex_ds.cost_of_service}}" data-ds-keywords="{{ex_ds.keywords}}" data-ds-data-fields="{{ex_ds.data_fields}}" data-ds-subscription-model="{{ex_ds.subscription_model}}" data-ds-approval-based-model="{{ex_ds.approval_based_model}}" ><span class="fa-solid fa-street-view"></span>Delete Datastack</a>
+                                                                    -->
                                                                     
                                                                 </div>
                                                             </div>
@@ -1331,6 +1334,70 @@ function parse_keywords()
             document.getElementById('view_subscription_model').value = dsSubscriptionModel;
             document.getElementById('view_approval_based_model').value = dsApprovalBasedModel;
             document.getElementById('view_thumbnail').value = dsThumbnail;
+            document.getElementById('delete_datastack_id').value = dsId;
+
+        }
+
+        
+    function modalEditDatastack(element) {
+            // Extract attributes from the clicked element
+            let dsId = element.getAttribute("data-ds-id");
+            let dsName = element.getAttribute("data-ds-name");
+            let dsApiUrl = element.getAttribute("data-ds-api-url");
+            let dsBasicInfo = element.getAttribute("data-ds-basic-info");
+            let dsDetailedInfo = element.getAttribute("data-ds-detailed-info");
+            let dsProvider = element.getAttribute("data-ds-provider");
+            let dsThumbnail = element.getAttribute("data-ds-thumbnail");
+            let dsUrl = element.getAttribute("data-ds-url");
+            let dsMetadataUrl = element.getAttribute("data-ds-metadata-url");
+            let dsVersion = element.getAttribute("data-ds-version");
+            let dsDatePublished = element.getAttribute("data-ds-date-published");
+            let dsLastUpdated = element.getAttribute("data-ds-last-updated");
+            let dsSampleDataUrl = element.getAttribute("data-ds-sample-data-url");
+            let dsLicenseUrl = element.getAttribute("data-ds-license-url");
+            let dsCos = element.getAttribute("data-ds-cos");
+            let dsKeywords = element.getAttribute("data-ds-keywords");
+            let dsDataFields = element.getAttribute("data-ds-data-fields");
+            let dsSubscriptionModel = element.getAttribute("data-ds-subscription-model");
+            let dsApprovalBasedModel = element.getAttribute("data-ds-approval-based-model");
+
+            // Populate modal input fields
+            //document.getElementById('modal_ds_id').value = dsId;
+            document.getElementById('view_datastack_name').value = dsName;
+            //document.getElementById('modal_ds_api_url').value = dsApiUrl;
+            document.getElementById('view_basic_info').value = dsBasicInfo;
+            document.getElementById('view_detailed_info').value = dsDetailedInfo;
+            document.getElementById('view_provider').value = dsProvider;
+            
+            document.getElementById('view_thumbnail').href = dsThumbnail;
+            document.getElementById('view_keywords').value = dsKeywords;
+            document.getElementById('view_data_fields').value = dsDataFields;
+            //document.getElementById('view_date_published').value = formatDate(dsDatePublished);
+            //document.getElementById('view_datastack_last_updated').value = dsLastUpdated;
+            document.getElementById('view_url').href = dsUrl;
+
+            if (dsMetadataUrl != "")
+            {
+                document.getElementById('view_metadata_url').href = dsMetadataUrl;
+            }
+            else{
+                document.getElementById('view_metadata_url').innerHTML = 'Not available';
+            }
+
+            if (dsSampleDataUrl != "")
+            {
+                document.getElementById('view_sample_data_url').href = dsSampleDataUrl;
+            }
+            else{
+                document.getElementById('view_sample_data_url').innerHTML = 'Not available';
+            }
+            
+            //document.getElementById('view_license_url').value = dsLicenseUrl;
+            document.getElementById('view_cost_of_service').value = dsCos;
+            document.getElementById('view_subscription_model').value = dsSubscriptionModel;
+            document.getElementById('view_approval_based_model').value = dsApprovalBasedModel;
+            document.getElementById('view_thumbnail').value = dsThumbnail;
+            document.getElementById('delete_datastack_id').value = dsId;
 
         }
 
