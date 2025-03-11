@@ -418,6 +418,7 @@ def dashboard():
                         datastack_details.thumbnail = request_form_cleaned["edit_thumbnail"]
                         db.session.commit()
                         existing_datastacks = Datastacks.query.all()
+                        db.session.commit()
                         message="The attempt to edit the datastack was processed successfully"
                         return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='edit-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
                     else:
@@ -429,7 +430,7 @@ def dashboard():
                     
             elif 'delete_datastack' in request.form:
                 try:
-                    print('Delete datastack received')
+                    #print('Delete datastack received')
                     datastack_id_to_be_deleted = request.form['delete_datastack_id']
                     
                     datastack_details = Datastacks.query.filter_by(id=datastack_id_to_be_deleted).first()
@@ -443,6 +444,7 @@ def dashboard():
                         message= "Datastack not deleted as this is not found in the system"
                         return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
                 except Exception as e:
+                    db.session.rollback()
                     message= "An unknown error occurred while deleting the datastack. Kindly try again. Detailed Error: D400: "+str(e)
                     return render_template('home/admin-dashboard.html', segment='dashboard', subsegment='datastacks', subsubsegment='delete-datastacks', user_id=current_user.id, user_role = current_user.role, existing_requests=existing_requests_requests_joinedwith_users_datastacks, form=edit_profile_form, approval_rejection_form=approval_rejection_form,existing_datastacks=existing_datastacks, datastack_form = datastack_form, view_datastack_form = view_datastack_form, alert_information=message)
 
