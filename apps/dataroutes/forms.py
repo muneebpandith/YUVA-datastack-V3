@@ -31,8 +31,8 @@ class DatastackForm(FlaskForm):
     sample_data_url   = StringField("Sample Data URL", validators=[Optional()])
     license_url       = StringField("License URL", validators=[Optional()])
     cost_of_service   = StringField("Cost of Service", validators=[Optional()])
-    keywords_shower           = TextAreaField("Keywords (comma-separated)", validators=[DataRequired()])
-    data_fields_shower       = TextAreaField("Data Fields (JSON format)", validators=[DataRequired()])
+    keywords_shower           = TextAreaField("Keywords (comma-separated)", validators=[Optional()])
+    data_fields_shower       = TextAreaField("Data Fields (JSON format)", validators=[Optional()])
     keywords          = TextAreaField("Keywords (comma-separated)", validators=[DataRequired()])
     data_fields       = TextAreaField("Data Fields (JSON format)", validators=[DataRequired()])
     
