@@ -270,7 +270,7 @@ def dashboard():
                                 file_id = extract_google_file_id(ds_requested.url)
                                 user_email = user_requested_by.email
                                 
-                                if file_id and user_email:
+                                if file_id and user_email and GOOGLE_ENABLED_ACCESS:
                                     #print(file_id, user_email)
                                     #make request to gdrive to add permissions for this user
                                     permission = {
