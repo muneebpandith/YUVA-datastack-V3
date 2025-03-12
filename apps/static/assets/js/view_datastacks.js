@@ -9,6 +9,7 @@
             const dropdown1 = document.getElementById("dropdown1");
             const dropdown2 = document.getElementById("dropdown2");
             const dropdown3 = document.getElementById("dropdown3");
+            const dropdown4 = document.getElementById("dropdown4");
             
             const submitButton = document.getElementById("data-filter-submit-btn");
             const paginationContainer = document.getElementById("data-pagination-container");
@@ -68,13 +69,16 @@
                 const selected1 = dropdown1.value;
                 const selected2 = dropdown2.value;
                 const selected3 = dropdown3.value;
+                const selected4 = dropdown4.value;
+                
         
                 filteredData = allData.filter(dataset => {
                     const keywords = dataset.keywords;
                     const match1 = selected1 && selected1 !== "All" ? keywords.includes(selected1) : true;
                     const match2 = selected2 && selected2 !== "All" ? keywords.includes(selected2) : true;
                     const match3 = selected3 && selected3 !== "All" ? keywords.includes(selected3) : true;
-                    return match1 && match2 && match3;
+                    const match4 = selected4 && selected4 !== "All" ? keywords.includes(selected4) : true;
+                    return match1 && match2 && match3 && match4;
                 });
         
                 currentPage = 1; // Reset to first page after filtering

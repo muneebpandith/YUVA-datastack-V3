@@ -46,9 +46,30 @@
                 </select>
             </div>
             <div class="col-md-3">
-                
-                <label for="dropdown2" class="form-label" style="font-family: Roboto;">Functionality</label>
+                <label for="dropdown2" class="form-label" style="font-family: Roboto;">Residential Type</label>
                 <select id="dropdown2" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option value="All">All</option>
+                      <option value="Rural">Rural</option>
+                      <option value="Urban">Urban</option>
+                </select>
+            </div>
+            
+            <div class="col-md-3">
+                <label for="dropdown3" class="form-label" style="font-family: Roboto;">Data level</label>
+                <select id="dropdown3" class="form-select" style="border-radius: 0; font-family: Roboto;">
+                    <option value="All">All</option>
+                    <option value="Household Level">Household Level</option>
+                    <option value="Individual Level">Individual Level</option>
+                    <option value="pee">Potential Entrepreneurs Employed (PEE)</option>
+                    <option value="peur">Potential Entrepreneurs Unregistered Activities (PEUR)</option>
+                    <option value="peu">Potential Entrepreneurs Unemployed (PEU)</option>
+                  </select>
+                  
+            </div>
+            <div class="col-md-3">
+                
+                <label for="dropdown4" class="form-label" style="font-family: Roboto;">Functionality</label>
+                <select id="dropdown4" class="form-select" style="border-radius: 0; font-family: Roboto;">
                     <option value="All" selected>All</option>
                     <option value="employment_status">Employment Status & Workforce by Age Group, Gender and Districts</option>
                     <option value="education_skill">Education & Skill Readiness by Age Group, Gender and Districts</option>
@@ -70,17 +91,7 @@
                     <option value="3">Potential Entrepreneurs (Employed)</option>
                 </select>
             </div> -->
-            <div class="col-md-3">
-                <label for="dropdown3" class="form-label" style="font-family: Roboto;">Type of Individuals</label>
-                <select id="dropdown3" class="form-select" style="border-radius: 0; font-family: Roboto;">
-                    <option value="All">All Individuals</option>
-                    <option value="pee">Potential Entrepreneurs Employed (PEE)</option>
-                    <option value="peur">Potential Entrepreneurs Unregistered Activities (PEUR)</option>
-                    <option value="peu">Potential Entrepreneurs Unemployed (PEU)</option>
-                    <option value="nape">Not Applicable</option>
-                  </select>
-                  
-            </div>
+           
             <div class="col-md-3 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100" style="font-family: Roboto;" id="data-filter-submit-btn">Submit</button>
             </div>
